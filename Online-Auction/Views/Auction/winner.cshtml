@@ -1,0 +1,187 @@
+﻿@using Online_Auction.Models
+@using System.Security.Claims
+@using Online_Auction.Services
+@model Online_Auction.Models.Auction
+@{
+    // Берём покупку из ViewBag
+    var purchase = ViewBag.Purchase as Purchase;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles/indexstyle.css">
+    <link rel="stylesheet" type="text/css" href="/styles/winnerstyle.css">
+    <title>Победитель аукциона</title>
+</head>
+<body>
+    <div class="container">
+
+        <header class="header">
+            <nav class="menu">
+                <ul class="nav nav-top">
+                    <li><a href="/">&#127968; Главная</a></li>
+                    <li><a href="/allresults">&#128203; Все лоты</a></li>
+                    <li><a href="/about">&#128187; О проекте</a></li>
+                    <li><a href="/rules">&#128214; Правила</a></li>
+                </ul>
+                <ul class="nav nav-bottom">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="user-profile">
+                                <span class="name-account">@User.FindFirst("FirstName")?.Value</span>
+                                <a class="icon" href="/adminaccount">&#128100;</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="user-profile">
+                                <span class="name-account">@User.FindFirst("FirstName")?.Value</span>
+                                <a class="icon" href="/usaccount">&#128100;</a>
+                            </li>
+                        }
+                        <li class="user-profile"><a href="/logout">Выйти</a></li>
+                    }
+                    else
+                    {
+                        <li class="user-profile"><a href="/login">Войти</a></li>
+                        <li class="user-profile"><a href="/registration">Регистрация</a></li>
+                    }
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main">
+                @if(Model.EndTime <= DateTime.Now)
+                {
+            <div class="winner-banner">
+                    <h1>&#127881; Аукцион завершён!</h1>          
+            </div>
+
+            <div class="winner-layout">
+                <!-- Информация о лоте -->
+                <section class="lot-summary-card">
+                    <h2>Выигранный лот</h2>
+                    <div class="lot-image-wrapper">
+                        <img src="@Model.Lot?.ImageUrl" alt="картинка">
+                    </div>
+
+                    <div class="lot-summary">
+                        <h3>@Model.Lot?.Title</h3>
+                        <p class="category">@Model.Lot?.Category?.NameC</p>
+                        <p class="description">@Model.Lot?.DescriptionLot</p>
+
+                        <div class="price-summary">
+                            <span class="label">Финальная цена</span>
+                            <span class="value">@purchase?.FinalPrice &#8381;</span>
+                        </div>
+
+                        <div class="auction-dates">
+                            <div class="date-row">
+                                <span>Начало:</span>
+                                <strong>@Model.StartTime</strong>
+                            </div>
+                            <div class="date-row">
+                                <span>Завершение:</span>
+                                <strong>@Model.EndTime</strong>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Данные победителя и продавца -->
+                <section class="participants-card">
+                    <!-- Победитель -->
+                    <div class="winner-info">
+                        <div class="section-header">
+                            <span class="icon">&#127942;</span>
+                            <h3>Победитель</h3>
+                        </div>
+
+                        @{
+                            var currentUserId = User.Identity.IsAuthenticated
+                            ? int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0")
+                            : 0;
+
+                            var winner = purchase?.Buyer;
+                            var isWinner = winner?.Id == currentUserId;
+                            var isSeller = Model.Lot?.SellerId == currentUserId;
+                        }
+
+                        @if (User.IsInRole("Admin") || isSeller ||
+                            User.IsInRole("User"))
+                        {
+                            @if (winner != null)
+                            {
+                                <div class="user-details">
+                                    <p><strong>Имя:</strong> @winner.FirstName</p>
+                                    <p><strong>Фамилия:</strong> @winner.LastName</p>
+                                    <p><strong>Email:</strong> @winner.Email</p>
+                                </div>                              
+                            }
+                            else
+                            {
+                                <p class="text-muted">Победитель не определён</p>
+                            }
+                        }
+                        else if (isWinner)
+                        {
+                            <div class="user-details">                                
+                                <p><strong>Сумма выигрыша:</strong> @purchase?.FinalPrice &#8381;</p>                            
+                            </div>
+                        }
+                        else
+                        {
+                            <p class="not-winner">К сожалению, нет победителя в этом аукционе</p>
+                        }
+                    </div>
+
+                    <!-- Продавец -->
+                    <div class="seller-info">
+                        <div class="section-header">
+                            <span class="icon">&#128100;</span>
+                            <h3>Продавец</h3>
+                        </div>                     
+                            <div class="user-details">
+                                <p><strong>Имя:</strong> @Model.Lot?.Seller?.FirstName</p>
+                                <p><strong>Фамилия:</strong> @Model.Lot?.Seller?.LastName</p>
+                                <p><strong>Email:</strong> @Model.Lot?.Seller?.Email</p>
+                            </div>               
+                    </div>
+                    
+                </section>
+            </div>
+            }
+            else
+            {
+                <h1>&#127881; Аукцион еще не завершен!</h1>
+            }
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <nav class="footer-nav">
+                    <a href="/allresults">Все лоты</a>
+                    <a href="/about">О проекте</a>
+                    <a href="/rules">Правила</a>
+                </nav>
+
+                <div class="social-icons">
+                    <span><img src="/images/github.png" alt="логотип" /></span>
+                    <span><img src="/images/vk.png" alt="логотип" /></span>
+                    <span><img src="/images/MAX-32x32.png" alt="логотип" /></span>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Интернет-аукцион. Все права защищены.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

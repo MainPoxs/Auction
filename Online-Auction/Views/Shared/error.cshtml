@@ -1,0 +1,27 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/error.css">
+    <title>О проекте</title>
+</head>
+<body>
+<div class="error-container">
+        <h1>&#9888; Произошла ошибка</h1>
+    <p class="error-message">
+        @if (ViewBag.StatusCode != null)
+        {
+            <text>Код ошибки: @ViewBag.StatusCode</text>
+        }
+        else
+        {
+            <text>Мы уже работаем над проблемой. Попробуйте позже.</text>
+        }
+    </p>
+    <a href="/" class="btn-primary">На главную</a>
+</div>
+
+</body>
+</html>

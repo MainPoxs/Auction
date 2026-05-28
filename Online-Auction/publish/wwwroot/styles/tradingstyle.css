@@ -1,0 +1,621 @@
+﻿.header {
+    position: relative;
+    z-index: 10;
+    padding: 15px 30px;
+    width: 100%;
+}
+
+.menu {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 10px 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.nav {
+    display: flex;
+    list-style: none;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav li a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+}
+
+.nav li a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 14px;
+    border-radius: 12px;
+}
+
+.name-account {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.user-profile .icon {
+    color: #fff;
+    font-size: 18px;
+    transition: transform 0.2s ease;
+}
+
+.user-profile .icon:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* =========================================
+   3D-КАРТОЧКА ЛОТА 
+   ========================================= */
+.container-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1200px;
+    padding: 60px 20px; 
+}
+
+.box-card {
+    width: 200px;
+    height: 300px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(-15deg) rotateY(25deg);
+    animation: rotateCube 18s infinite linear;
+    cursor: pointer;
+}
+
+.box-card:hover {
+    animation-play-state: paused;
+}
+
+/* Базовая грань */
+.face {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,0.15);
+    backface-visibility: hidden;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+}
+
+.front {
+    width: 200px;
+    height: 300px;
+    transform: translateZ(100px);
+    background: linear-gradient(145deg, #1a1a2e, #16213e);
+}
+
+.back {
+    width: 200px;
+    height: 300px;
+    transform: rotateY(180deg) translateZ(100px);
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.left {
+    width: 200px;
+    height: 300px;
+    transform: rotateY(-90deg) translateZ(100px);
+    background: linear-gradient(145deg, #533483, #16213e);
+    border-color: #9c27b0;
+}
+
+.right {
+    width: 200px;
+    height: 300px;
+    transform: rotateY(90deg) translateZ(100px);
+    background: linear-gradient(145deg, #0f3443, #16213e);
+    border-color: #00bcd4;
+}
+
+.top {
+    width: 200px;
+    height: 200px;
+    transform: rotateX(90deg) translateZ(100px); 
+    background: linear-gradient(145deg, #e94560, #533483);
+    border-color: #ffc107;
+}
+
+.bottom {
+    width: 200px;
+    height: 200px;
+    transform: rotateX(-90deg) translateZ(150px);
+    background: linear-gradient(145deg, #1a1a2e, #0f3443);
+    border-color: #4caf50;
+}
+
+/* Контент внутри граней */
+.face-content {
+    text-align: center;
+    color: #fff;
+    padding: 10px;
+    z-index: 2;
+}
+
+.face-content h3 {
+    font-size: 12px;
+    margin: 0 0 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.face-content p {
+    font-size: 11px;
+    opacity: 0.9;
+    margin: 3px 0;
+}
+
+.lot-price {
+    font-size: 18px !important;
+    color: #ffd700;
+    font-weight: 700;
+}
+
+.face-content .icon {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.lot-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: rgba(0,0,0,0.1);
+}
+
+@keyframes rotateCube {
+    0% {
+        transform: rotateX(-15deg) rotateY(0deg);
+    }
+
+    25% {
+        transform: rotateX(-15deg) rotateY(90deg);
+    }
+
+    50% {
+        transform: rotateX(-15deg) rotateY(180deg);
+    }
+
+    75% {
+        transform: rotateX(-15deg) rotateY(270deg);
+    }
+
+    100% {
+        transform: rotateX(-15deg) rotateY(360deg);
+    }
+}
+
+.trading-layout {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.lot-info-card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+}
+
+.lot-details {
+    padding: 25px;
+}
+
+.lot-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 15px 0;
+}
+
+.lot-meta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.category-tag {
+    background: rgba(102, 126, 234, 0.1);
+    color: #1a4d7a;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.lot-id {
+    color: #999;
+    font-size: 13px;
+}
+
+.description-block h3,
+.seller-info h3 {
+    font-size: 16px;
+    color: #1a4d7a;
+    margin: 0 0 10px 0;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #667eea15;
+}
+
+.description-block p {
+    color: #555;
+    line-height: 1.7;
+    margin: 0 0 25px 0;
+}
+
+.seller-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+    font-weight: 500;
+}
+
+.bidding-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.price-card,
+.timer-card,
+.bid-form-card {
+    background: #fff;
+    border-radius: 10px;
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    padding: 30px;
+}
+
+.price-label {
+    font-size: 13px;
+    color: #1a4d7a;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.current-price {
+    font-size: 36px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #1762A6 0%, #2E6A9D 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.min-bid-info {
+    font-size: 13px;
+    color: #1a4d7a;
+    margin-top: 10px;
+}
+
+.timer-label {
+    font-size: 13px;
+    color: #1a4d7a;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.timer-display {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.time-part {
+    background: linear-gradient(135deg, #1762A6 0%, #2E6A9D 100%);
+    color: #fff;
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    min-width: 65px;
+    text-align: center;
+}
+
+.time-part span {
+    font-size: 24px;
+    display: block;
+}
+
+.bid-form-card h3 {
+    background: linear-gradient(135deg, #1762A6 0%, #2E6A9D 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 20px 0;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-icon input {
+    width: 100%;
+    padding: 12px 40px 12px 15px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.input-with-icon input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.currency-icon {
+    position: absolute;
+    right: 15px;
+    color: #999;
+    font-weight: 600;
+}
+
+.btn-bid-submit {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #1762A6 0%, #2E6A9D 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-bid-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.alert {
+    padding: 12px 16px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.alert-error {
+    background: #fee;
+    color: #c0392b;
+    border-left: 4px solid #e74c3c;
+}
+
+.alert-success {
+    background: #efe;
+    color: #27ae60;
+    border-left: 4px solid #27ae60;
+}
+
+.bids-history-section {
+    margin-top: 40px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+}
+
+.bids-history-section h2 {
+    color: #1a4d7a;
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 10px;
+}
+
+.bids-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bids-table th {
+    background: #667eea15;
+    color: #667eea;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.bids-table td {
+    padding: 14px 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.bids-table tbody tr:hover {
+    background: #f8f9ff;
+}
+
+.bid-leading {
+    background: rgba(39, 174, 96, 0.05);
+}
+
+.leading-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #27ae60, #219a52);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+.bid-amount {
+    font-weight: 700;
+    color: #667eea;
+    font-size: 16px;
+}
+
+/* Планшеты (до 768px) */
+@media (max-width: 768px) {
+    .container-card {
+        padding: 20px;
+    }
+
+    .box-card {
+        width: 180px;
+        height: 270px;   
+    }
+
+    .front {
+        width: 180px;
+        height: 270px;
+        transform: translateZ(90px);
+    }
+
+    .back {
+        width: 180px;
+        height: 270px;
+        transform: rotateY(180deg) translateZ(90px);
+    }
+
+    .left {
+        width: 180px;
+        height: 270px;
+        transform: rotateY(-90deg) translateZ(90px);
+    }
+
+    .right {
+        width: 180px;
+        height: 270px;
+        transform: rotateY(90deg) translateZ(90px);
+    }
+
+    .top {
+        width: 180px;
+        height: 180px;
+        transform: rotateX(90deg) translateZ(135px);
+    }
+
+    .bottom {
+        width: 180px;
+        height: 180px;
+        transform: rotateX(-90deg) translateZ(135px);
+    }
+
+    .face-content h3 {
+        font-size: 11px;
+    }
+
+    .face-content p {
+        font-size: 9px;
+    }
+
+    .face-content .icon {
+        font-size: 20px;
+    }
+}
+
+/* Мобильные телефоны (до 480px) */
+@media (max-width: 480px) {
+    .container-card {
+        padding: 10px;
+    }
+
+    .box-card {
+        width: 150px;
+        height: 225px;
+    }
+
+    .front {
+        width: 150px;
+        height: 225px;
+        transform: translateZ(75px);
+    }
+
+    .back {
+        width: 150px;
+        height: 225px;
+        transform: rotateY(180deg) translateZ(75px);
+    }
+
+    .left {
+        width: 150px;
+        height: 225px;
+        transform: rotateY(-90deg) translateZ(75px);
+    }
+
+    .right {
+        width: 150px;
+        height: 225px;
+        transform: rotateY(90deg) translateZ(75px);
+    }
+
+    .top {
+        width: 150px;
+        height: 150px;
+        transform: rotateX(90deg) translateZ(112px); 
+    }
+
+    .bottom {
+        width: 150px;
+        height: 150px;
+        transform: rotateX(-90deg) translateZ(112px);
+    }
+
+    .face-content h3 {
+        font-size: 10px;
+    }
+
+    .face-content p {
+        font-size: 8px;
+    }
+
+    .face-content .icon {
+        font-size: 18px;
+    }
+}

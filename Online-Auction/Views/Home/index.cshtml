@@ -1,0 +1,414 @@
+﻿@using Online_Auction.Models
+@using System.Security.Claims
+@using Online_Auction.Services
+@model List<Online_Auction.Models.Lot>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles/indexstyle.css">
+    <title>Интернет-аукцион</title>
+</head>
+<body>
+    <div class="container">
+        <div class="title-page">              
+            <div class="hero-bg"></div>
+    
+            <header class="header">
+                <nav class="menu">
+                    <ul class="nav nav-top">
+                        <li><a href="/">&#127968; Главная</a></li>
+                        <li><a href="/allresults">&#128203; Все лоты</a></li>
+                        <li><a href="/about">&#128187; О проекте</a></li>
+                        <li><a href="/rules">&#128214; Правила</a></li>                        
+                    </ul>
+                    <ul class="nav nav-bottom">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="user-profile">
+                                    <span class="name-account">@User.FindFirst("FirstName")?.Value</span>
+                                    <a class="icon" href="/adminaccount">&#128100;</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="user-profile">
+                                    <span class="name-account">@User.FindFirst("FirstName")?.Value</span>
+                                    <a class="icon" href="/usaccount">&#128100;</a>
+                                </li>
+                            }
+                            <li class="user-profile"><a href="/logout">Выйти</a></li>
+                        }
+                        else
+                        {
+                            <li class="user-profile"><a href="/login">Войти</a></li>
+                            <li class="user-profile"><a href="/registration">Регистрация</a></li>
+                        }
+                    </ul>
+                </nav>
+            </header>
+
+            <div class="curved-carousel">
+                <div class="carousel-wrapper">
+                    <div class="carousel-card active">
+                        <a href="/allresults">
+                            <img src="/images/carousel/1.png" alt="Лот 1">
+                            <div class="card-overlay">
+                                <h3>Уникальные предложения. Не пропусти!</h3>
+                                <p>Откройте для себя</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="carousel-card active">
+                        <a href="/trading/17">
+                            <img src="/images/carousel/apple.jpg" alt="Лот 17">
+                            <div class="card-overlay">
+                                <h3>Картина Шедевр</h3>
+                                <p>Аукцион 21 мая</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="carousel-card active">
+                        <a href="/trading/18">
+                        <img src="/images/carousel/sculptura_.png" alt="Лот 18">
+                        <div class="card-overlay">
+                            <h3>Мраморная скульптура</h3>
+                            <p>Особое предложение</p>
+                        </div>
+                        </a>
+                    </div>
+
+                    <div class="carousel-card active">
+                        <a href="/trading/19">
+                        <img src="/images/carousel/art.jpg" alt="Лот 19">
+                        <div class="card-overlay">
+                            <h3>Art #19</h3>
+                            <p>Аукцион 20 мая </p>
+                        </div>
+                        </a>
+                    </div>
+
+                    <div class="carousel-card active">
+                        <a href="/trading/20">
+                        <img src="/images/carousel/tic-fotor.png" alt="Лот 20">
+                        <div class="card-overlay">
+                                <h3>Особое предложение</h3>
+                            <p>Аукцион 21 мая</p>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Индикаторы -->
+                <div class="carousel-dots">
+                    <span class="dot active" onclick="goToSlide(0)"></span>
+                    <span class="dot" onclick="goToSlide(1)"></span>
+                    <span class="dot" onclick="goToSlide(2)"></span>
+                    <span class="dot" onclick="goToSlide(3)"></span>
+                    <span class="dot" onclick="goToSlide(4)"></span>
+                </div>
+            </div>
+        </div>
+
+       <main>    
+            <!-- Секция "О проекте" -->
+            <section class="about-section">
+                <div class="about-container">
+
+                    <!-- Заголовок -->
+                    <div class="about-header">
+                        <h2>О проекте</h2>
+                        <p class="about-subtitle">
+                            Интернет-аукцион — это безопасная площадка для покупки и продажи
+                            уникальных товаров. Мы объединяем коллекционеров, продавцов и покупателей
+                            в одном месте.
+                        </p>
+                    </div>
+
+                    <!-- Карточки преимуществ -->
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">&#128737;</div>
+                            <h3>Безопасные сделки</h3>
+                            <p>Все транзакции защищены, а продавцы проходят верификацию</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">&#128276;</div>
+                            <h3>Проверенные лоты</h3>
+                            <p>Каждый товар модерируется перед публикацией</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">&#128172;</div>
+                            <h3>Поддержка 24/7</h3>
+                            <p>Поможем с любым вопросом в чате или по почте</p>
+                        </div>
+                    </div>
+
+                    <!-- Статистика -->
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <span class="stat-number" id="stat-lots">0</span>
+                            <span class="stat-label">лотов</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="stat-users">0</span>
+                            <span class="stat-label">пользователей</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">98%</span>
+                            <span class="stat-label">успешных сделок</span>
+                        </div>
+                    </div>
+
+                    <!-- Призыв к действию -->
+                    <div class="about-cta">
+                        <p>Готовы найти свой уникальный лот?</p>
+                        @if (!User.Identity?.IsAuthenticated ?? true)
+                        {
+                            <a href="/registration" class="btn-about">Начать торговлю</a>
+                        }
+                        else
+                        {
+                            <a href="/allresults" class="btn-about">Смотреть лоты</a>
+                        }
+                    </div>
+                </div>
+            </section>
+
+            <div class="auctions-grid">
+                @foreach (var lot in Model)
+                {
+                    // Пропускаем лот, если он заблокирован
+                    if (lot.Status == LotStatus.Blocked) { continue; }
+
+                    var isExpired = lot.EndDate <= DateTime.Now;
+                    var isParticipatable = lot.Status == LotStatus.Active && !isExpired;
+                    var timeLeft = lot.EndDate - DateTime.Now;
+
+                    <article class="auction-card">
+                        <!-- Изображение лота -->
+                        <div class="lot-image-container">
+                            @if (!string.IsNullOrEmpty(lot.ImageUrl))
+                            {
+                                <img src="@lot.ImageUrl" alt="картинки">
+                            }
+                            else
+                            {
+                                <div class="no-image">
+                                    <span>&#128444;</span>
+                                    <small>Нет фото</small>
+                                </div>
+                            }
+
+                            <!-- ТАЙМЕР -->
+                            <div class="lot-timer @(isParticipatable ? "active" : "ended")">
+                                <span>&#8987;</span>
+                                <span class="timer-text">
+                                    @if (isParticipatable)
+                                    {
+                                        @FormatTimeSpan(timeLeft)
+                                    }
+                                    else
+                                    {
+                                        <text>Завершён</text>
+                                    }
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Контент карточки -->
+                        <div class="card-body">                           
+                            <div class="card-header">                               
+                                <h3 class="card-title">@lot.Title</h3>
+                            </div>
+                          
+                            <div class="card-info-row">
+                                <div class="price-block">
+                                    <span class="info-label">Текущая ставка</span>
+                                    <span class="current-price">@lot.CurrentPrice &#8381;</span>
+                                </div>                                
+                            </div>
+                          
+                            <div class="card-link">
+                                <a href="/details/@lot.Id" class="link-details">
+                                    Подробнее &#8594;
+                                </a>
+                            </div>
+                        </div>
+                     
+                        <div class="card-footer">
+                            @if (isParticipatable)
+                            {
+                                <a href="/trading/@lot.Id" class="btn-participate">
+                                    &#128293; Участвовать
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="/auction/winner/@lot.Id" class="btn-view">
+                                    &#127942; Результаты
+                                </a>
+                            }
+                        </div>
+                    </article>
+                }
+            </div>
+
+            @if (Model.Count > 0)
+            {
+                <div class="view-all-lots">
+                    <a href="/allresults" class="btn-view-all">
+                        Посмотреть все лоты &#8594;
+                    </a>
+                </div>
+            }   
+       </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <nav class="footer-nav">
+                    <a href="/allresults">Все лоты</a>
+                    <a href="/about">О проекте</a>
+                    <a href="/rules">Правила</a>
+                </nav>
+
+                <div class="social-icons">
+                    <span><img src="/images/github.png" alt="логотип" /></span>
+                    <span><img src="/images/vk.png" alt="логотип" /></span>
+                    <span><img src="/images/MAX-32x32.png" alt="логотип" /></span>
+                </div>
+            </div>
+       
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Интернет-аукцион. Все права защищены.</p>
+            </div>
+        </footer>
+    </div>
+
+    @* Метод для форматирования времени *@
+    @functions {
+        string FormatTimeSpan(TimeSpan time)
+        {
+            if (time.TotalDays >= 1)
+                return $"{(int)time.TotalDays} д. {(int)time.Hours} ч.";
+            if (time.TotalHours >= 1)
+                return $"{(int)time.TotalHours} ч. {(int)time.Minutes} мин.";
+            if (time.TotalMinutes >= 1)
+                return $"{(int)time.TotalMinutes} мин.";
+            return "менее минуты";
+        }
+    }
+ <script>
+    let currentSlide = 0;
+    const totalSlides = 5;
+    
+    function goToSlide(index) {
+        currentSlide = index;
+        updateCarousel();
+    }
+    
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateCarousel();
+    }
+    
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+    }
+    
+    function updateCarousel() {
+        const cards = document.querySelectorAll('.carousel-card');
+        const dots = document.querySelectorAll('.dot');
+        
+        cards.forEach((card, index) => {
+            card.classList.remove('active');
+            
+            // Сдвигаем индексы относительно текущего слайда
+            const offset = (index - currentSlide + totalSlides) % totalSlides;
+            
+            if (offset === 0) {
+                card.classList.add('active');
+                card.style.transform = 'translateX(0) translateZ(0) scale(1.1)';
+                card.style.opacity = '1';
+                card.style.zIndex = '5';
+            } else if (offset === 1) {
+                card.style.transform = 'translateX(180px) translateZ(-200px) rotateY(-15deg)';
+                card.style.opacity = '0.85';
+                card.style.zIndex = '3';
+            } else if (offset === 2) {
+                card.style.transform = 'translateX(360px) translateZ(-400px) rotateY(-25deg)';
+                card.style.opacity = '0.7';
+                card.style.zIndex = '2';
+            } else if (offset === 3) {
+                card.style.transform = 'translateX(-360px) translateZ(-400px) rotateY(25deg)';
+                card.style.opacity = '0.7';
+                card.style.zIndex = '2';
+            } else if (offset === 4) {
+                card.style.transform = 'translateX(-180px) translateZ(-200px) rotateY(15deg)';
+                card.style.opacity = '0.85';
+                card.style.zIndex = '3';
+            }
+        });
+        
+        // Обновляем точки
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    }
+    
+    // Автопрокрутка
+    let autoPlay = setInterval(nextSlide, 3000);
+    
+    // Пауза при наведении
+    document.querySelector('.curved-carousel').addEventListener('mouseenter', () => {
+        clearInterval(autoPlay);
+    });
+    
+    document.querySelector('.curved-carousel').addEventListener('mouseleave', () => {
+        autoPlay = setInterval(nextSlide, 5000);
+    });
+    
+    // Инициализация
+    updateCarousel();
+
+    // Анимация счётчиков статистики
+    function animateValue(element, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const value = Math.floor(progress * (end - start) + start);
+            element.textContent = value.toLocaleString('ru-RU') + (end >= 1000 ? '+' : '');
+            if (progress < 1) window.requestAnimationFrame(step);
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    // Запуск при прокрутке до секции
+    document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateValue(document.getElementById('stat-lots'), 0, 1250, 2000);
+                    animateValue(document.getElementById('stat-users'), 0, 850, 2000);
+                    observer.disconnect();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsRow = document.querySelector('.stats-row');
+        if (statsRow) observer.observe(statsRow);
+    });
+</script>
+</body>
+</html>

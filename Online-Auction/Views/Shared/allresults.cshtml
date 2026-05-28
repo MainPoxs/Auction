@@ -1,0 +1,273 @@
+﻿@using Online_Auction.Models
+@using System.Security.Claims
+@using Online_Auction.Services
+@model List<Online_Auction.Models.Lot>
+
+@{
+    var currentFilter = ViewBag.CurrentFilter as LotFilter? ?? LotFilter.Active;
+    var currentCategoryId = ViewBag.CurrentCategoryId as int?;
+    var categories = ViewBag.Categories;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles/indexstyle.css">
+    <link rel="stylesheet" type="text/css" href="/styles/resultstyle.css">
+    <title>Все аукционы</title>    
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="menu">
+                <ul class="nav nav-top">
+                    <li><a href="/">&#127968; Главная</a></li>
+                    <li><a href="/allresults">&#128203; Все лоты</a></li>
+                    <li><a href="/about">&#128187; О проекте</a></li>
+                    <li><a href="/rules">&#128214; Правила</a></li>
+                </ul>
+                <ul class="nav nav-bottom">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="user-profile">
+                                <span class="name-account">@User.FindFirst("FirstName")?.Value</span>
+                                <a class="icon" href="/adminaccount">&#128100;</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="user-profile">
+                                <span class="name-account">@User.FindFirst("FirstName")?.Value</span>
+                                <a class="icon" href="/usaccount">&#128100;</a>
+                            </li>
+                        }
+                        <li class="user-profile"><a href="/logout">Выйти</a></li>
+                    }
+                    else
+                    {
+                        <li class="user-profile"><a href="/login">Войти</a></li>
+                        <li class="user-profile"><a href="/registration">Регистрация</a></li>
+                    }
+                </ul>
+            </nav>
+        </header>
+        <h2 class="page-title">&#128203; Все лоты</h2>        
+
+        <main class="main"> 
+        <div class="category-filter">
+            <form method="get" action="/allresults" class="category-form">
+                <input type="hidden" name="filter" value="@currentFilter" />
+                <label for="categoryId" class="category-label">&#128194; Категория:</label>
+                <select name="categoryId" id="categoryId" class="category-select" onchange="this.form.submit()">
+                    <option value="">Все категории</option>
+                    @if (categories != null)
+                    {
+                        @foreach (var cat in categories)
+                        {
+                            @if (currentCategoryId == cat.Id)
+                            {
+                                <option value="@cat.Id" selected>@cat.NameC</option>
+                            }
+                            else
+                            {
+                                <option value="@cat.Id">@cat.NameC</option>
+                            }
+                        }
+                    }
+                </select>
+            </form>
+        </div>
+
+        <div class="filter-section">
+            <div class="filter-tabs">
+                <a href="/allresults/?filter=Active&categoryId=@currentCategoryId"
+                   class="filter-tab @(currentFilter == LotFilter.Active ? "active" : "")">
+                    &#128293; Активные
+                </a>
+                <a href="/allresults/?filter=Completed&categoryId=@currentCategoryId"
+                   class="filter-tab @(currentFilter == LotFilter.Completed ? "active" : "")">
+                    &#9989; Завершённые
+                </a>
+                <a href="/allresults/?filter=All&categoryId=@currentCategoryId"
+                   class="filter-tab @(currentFilter == LotFilter.All ? "active" : "")">
+                    &#128203; Все лоты
+                </a>
+            </div>
+
+            <h2 class="section-title">
+                @switch (currentFilter)
+                {
+                    case LotFilter.Active: <span>&#128293; Активные аукционы</span>; break;
+                    case LotFilter.Completed: <span>&#128204; Завершённые аукционы</span>; break;
+                    default: <span>&#128269; Все лоты</span>; break;
+                }
+            </h2>
+        </div>
+
+    <!-- СЕТКА КАРТОЧЕК -->
+    @if (Model != null && Model.Any())
+    {
+        <div class="lots-grid">
+            @foreach (var lot in Model)
+            {
+                if (lot.Status == LotStatus.NotActive ||
+                 lot.Status == LotStatus.Review ||
+                 lot.Status == LotStatus.Blocked) { continue; }
+
+                var isExpired = lot.EndDate <= DateTime.Now;
+                var isParticipatable = lot.Status == LotStatus.Active && !isExpired;
+                var timeLeft = lot.EndDate - DateTime.Now;
+
+                <article class="lot-card">                    
+                    <!-- Изображение -->
+                    <div class="lot-image-container">
+                        @if (!string.IsNullOrEmpty(lot.ImageUrl))
+                        {
+                            <img src="@lot.ImageUrl" alt="@lot.Title">
+                        }
+                        else
+                        {
+                            <div class="no-image">
+                                <span>&#128444;</span>
+                                <small>Нет фото</small>
+                            </div>
+                        }
+                        
+                        <!-- Таймер -->
+                        <div class="lot-timer @(isParticipatable ? "active" : "ended")">
+                            <span>&#8987;</span>
+                            <span class="timer-text">
+                                @if (isParticipatable)
+                                {
+                                    @FormatTimeSpan(timeLeft)
+                                }
+                                else
+                                {
+                                    <text>Завершён</text>
+                                }
+                            </span>
+                        </div>
+                        
+                        <!-- Бейдж статуса -->
+                        <span class="status-badge @(lot.Status switch {
+                            LotStatus.Sold => "sold",
+                            LotStatus.NotActive => "ended",
+                            _ => "active"})">
+                            @(lot.Status switch {
+                                LotStatus.Sold => "Продан",
+                                LotStatus.NotActive => "Завершён",
+                                _ => "Активен"
+                            })
+                        </span>
+                    </div>
+             
+                    <div class="card-body">
+                        <!-- Категория + Заголовок -->
+                        <div class="card-header">
+                            <span class="category-tag">@lot.Category?.NameC</span>
+                            <h3 class="card-title">@lot.Title</h3>
+                        </div>                      
+
+                        <!-- Продавец -->
+                        <div class="seller-info">
+                            <span class="seller-icon">&#128100;</span>
+                            <small>@lot.Seller?.FirstName @lot.Seller?.LastName</small>
+                        </div>
+
+                        <!-- Цена + Даты -->
+                        <div class="card-meta">
+                            <div class="price-block">
+                                <span class="info-label">Ставка</span>
+                                <span class="current-price">@lot.CurrentPrice &#8381;</span>
+                            </div>                            
+                        </div>
+
+                        <!-- Ссылка Подробнее -->
+                        <div class="card-link">
+                            <a href="/trading/@lot.Id" class="link-details">
+                                Подробнее &#8594;
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Кнопка действия -->
+                    <div class="card-footer">
+                        @if (isParticipatable)
+                        {
+                            <a href="/trading/@lot.Id" class="btn-participate">
+                                &#128293; Участвовать
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/auction/winner/@lot.Id" class="btn-view">
+                                &#127942; Результаты
+                            </a>
+                        }
+                    </div>
+                </article>
+            }
+        </div>
+
+        <!-- Пагинация / "Показать ещё" -->
+        @if (Model.Count == 20)
+        {
+            <div class="load-more">
+                <a href="/lots/list" class="btn-secondary">
+                    Показать все лоты &#8594;
+                </a>
+            </div>
+        }
+    }
+    else
+    {
+        <!-- Пустое состояние -->
+        <div class="empty-state">
+            <div class="empty-icon">&#128269;</div>
+            <h3>Лоты не найдены</h3>
+            <p class="empty-description">Попробуйте изменить фильтры или загляните позже.</p>
+            <a href="/allresults?filter=All" class="btn-secondary">Сбросить фильтры</a>
+        </div>
+    }
+        </main>
+        <footer class="footer">
+            <div class="footer-content">
+                <nav class="footer-nav">
+                    <a href="/allresults">Все лоты</a>
+                    <a href="/about">О проекте</a>
+                    <a href="/rules">Правила</a>
+                </nav>
+
+                <div class="social-icons">
+                    <span><img src="/images/github.png" alt="логотип" /></span>
+                    <span><img src="/images/vk.png" alt="логотип" /></span>
+                    <span><img src="/images/MAX-32x32.png" alt="логотип" /></span>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Интернет-аукцион. Все права защищены.</p>
+            </div>
+        </footer>
+    </div>
+    @* Метод для форматирования времени *@
+    @functions {
+        string FormatTimeSpan(TimeSpan time)
+        {
+            if (time.TotalDays >= 1)
+                return $"{(int)time.TotalDays} д. {(int)time.Hours} ч.";
+            if (time.TotalHours >= 1)
+                return $"{(int)time.TotalHours} ч. {(int)time.Minutes} мин.";
+            if (time.TotalMinutes >= 1)
+                return $"{(int)time.TotalMinutes} мин.";
+            return "менее минуты";
+        }
+    }
+</body>
+</html>

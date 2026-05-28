@@ -1,0 +1,795 @@
+﻿
+.header {
+    position: relative;
+    z-index: 10;
+    padding: 15px 30px;
+    width: 100%;
+}
+
+.menu {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 10px 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.nav {
+    display: flex;
+    list-style: none;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav li a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+}
+
+    .nav li a:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+        transform: translateY(-1px);
+    }
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 14px;
+    border-radius: 12px;
+}
+
+.name-account {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.user-profile .icon {
+    color: #fff;
+    font-size: 18px;
+    transition: transform 0.2s ease;
+}
+
+    .user-profile .icon:hover {
+        transform: scale(1.1);
+    }
+
+/* =========================================
+   ЗАГОЛОВОК СТРАНИЦЫ
+   ========================================= */
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin: 20px 0 25px;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================================
+   ФИЛЬТРЫ
+   ========================================= */
+.category-filter {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.category-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.category-label {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.category-select {
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+}
+
+    .category-select option {
+        background: #1a1a2e;
+        color: #fff;
+    }
+
+/* Табы фильтров */
+.filter-section {
+    margin-bottom: 30px;
+}
+
+.filter-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-tab {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.filter-tab:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.filter-tab.active {
+    background: linear-gradient(135deg, #1762A6 0%, #2E6A9D 100%);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(23, 98, 166, 0.4);
+}
+
+.section-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+}
+
+    .section-title span {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+/* =========================================
+   СЕТКА КАРТОЧЕК
+   ========================================= */
+.lots-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    width: 100%;
+    padding: 10px 5px 40px;
+    align-items: start;
+}
+
+/* =========================================
+   КАРТОЧКА ЛОТА
+   ========================================= */
+.lot-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 24px;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.35s ease;
+    position: relative;
+    padding: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2),
+        0 4px 12px rgba(23, 98, 166, 0.15);
+    min-height: auto;
+    height: 100%;
+}
+
+.lot-card:hover {
+    background: rgba(255, 255, 255, 0.13);
+    border-color: rgba(255, 255, 255, 0.35);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3), 0 10px 25px rgba(23, 98, 166, 0.25);
+}
+
+/* Изображение лота */
+.lot-image-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 18px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35),
+        0 5px 15px rgba(23, 98, 166, 0.25),
+        inset 0 2px 0 rgba(255, 255, 255, 0.2), 
+        inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    margin: 0 0 12px 0;
+}
+
+.lot-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
+}
+
+.lot-card:hover .lot-image-container {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4),
+        0 8px 20px rgba(23, 98, 166, 0.35), 
+        inset 0 2px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+}
+.lot-card:hover .lot-image-container img {
+    transform: scale(1.08);
+}
+
+.no-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 13px;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+    .no-image span {
+        font-size: 48px;
+        margin-bottom: 8px;
+        opacity: 0.6;
+    }
+
+/* Таймер */
+.lot-timer {
+    position: absolute;
+    top: 4px;
+    right: 3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    z-index: 10;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15), 
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 1);
+    transition: background 0.3s ease;
+}
+
+.lot-timer.active {
+    background: rgba(23, 98, 166, 0.04);
+    border-color: rgba(23, 98, 166, 0.12);
+    animation: pulse 2s infinite;
+}
+
+.lot-timer.ended {
+    background: rgba(149, 165, 166, 0.04);
+    border-color: rgba(149, 165, 166, 0.08);
+}
+
+.timer-text {
+    white-space: nowrap;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        background: rgba(23, 98, 166, 0.15);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    50% {
+        background: rgba(23, 98, 166, 0.25);
+        box-shadow: 0 4px 20px rgba(23, 98, 166, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* Бейдж статуса */
+.status-badge {
+    position: absolute;
+    top: 4px;
+    left: 3px;
+    padding: 6px 12px;
+    background: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    z-index: 10;
+    border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.status-badge.sold {
+    background: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+    border-color: rgba(52, 152, 219, 0.3);
+}
+
+.status-badge.ended {
+    background: rgba(149, 165, 166, 0.2);
+    color: #95a5a6;
+    border-color: rgba(149, 165, 166, 0.3);
+}
+
+/* Тело карточки */
+.card-body {
+    flex: 0 0 auto;
+    padding: 18px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.card-header {
+    min-height: 44px;
+}
+
+.category-tag {
+    display: inline-block;
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.seller-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.seller-icon {
+    font-size: 14px;
+}
+
+/* Блок цены */
+.card-meta {
+    padding: 10px 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin: 4px 0;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.info-label {
+    display: block;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.55);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.price-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.current-price {
+    font-size: 21px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Ссылка "Подробнее" */
+.card-link {
+    padding-top: 2px;
+}
+
+.link-details {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    padding: 4px 0;
+}
+
+.link-details:hover {
+    color: #fff;
+    gap: 9px;
+}
+
+/* Футер карточки с кнопкой */
+.card-footer {
+    padding: 14px 14px 14px;
+    margin-top: auto;
+    position: relative;
+    z-index: 10;
+}
+
+.btn-participate,
+.btn-view {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    width: 100%;
+    padding: 13px 18px;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-participate {
+    background: linear-gradient(135deg,
+    #1762A6 0%, #2E6A9D 100%);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+    .btn-participate:hover {
+        background: linear-gradient(135deg,
+        #2E6A9D 0%, #738CA2 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 22px rgba(23, 98, 166, 0.5), 
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+.btn-view {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+    .btn-view:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.4);
+    }
+
+/* Кнопка "Показать все" */
+.load-more {
+    text-align: center;
+    padding: 40px 0 60px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 38px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+    .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.18);
+        border-color: rgba(255, 255, 255, 0.45);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(23, 98, 166, 0.35),
+            inset 0 1px 0 rgba(255, 255, 255, 0.25);
+        gap: 14px;
+    }
+
+/* Пустое состояние */
+.empty-state {
+    text-align: center;
+    padding: 60px 30px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    margin: 20px 0;
+}
+
+.empty-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    opacity: 0.6;
+}
+
+.empty-state h3 {
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.empty-description {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 20px;
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+.footer {
+    width: 100%;
+    padding: 30px 20px 25px;
+    background: rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 20px;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 32px;
+}
+
+.footer-nav a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.footer-nav a:hover {
+    color: #fff;
+}
+
+.footer-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.8);
+    transition: width 0.3s ease;
+}
+
+.footer-nav a:hover::after {
+    width: 100%;
+ }
+
+.footer .social-icons {
+    position: absolute;
+    right: 0;
+    display: flex;
+    gap: 12px;
+}
+
+.footer .social-icons span {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+    .footer .social-icons span:hover {
+        background: rgba(255, 255, 255, 0.18);
+        border-color: rgba(255, 255, 255, 0.4);
+        transform: translateY(-2px);
+    }
+
+.footer-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, 
+    transparent 0%, rgba(255, 255, 255, 0.3) 20%,
+    rgba(255, 255, 255, 0.3) 80%, transparent 100%);
+    margin: 24px 0 20px;
+}
+
+.footer-bottom p {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+}
+
+/* =========================================
+   АДАПТИВНОСТЬ
+   ========================================= */
+@media (max-width: 1200px) {
+    .lots-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .lots-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .lots-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        padding-bottom: 15px;
+    }
+
+    .lot-card {
+        padding: 14px;
+    }
+
+    .lot-image-container {
+        min-height: 240px;
+    }
+
+    .card-body {
+        padding: 16px 12px 12px;
+    }
+
+    .card-title {
+        font-size: 17px;
+    }
+
+    .current-price {
+        font-size: 23px;
+    }
+
+    .card-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .btn-secondary {
+        width: 100%;
+        max-width: 320px;
+        justify-content: center;
+    }
+
+    .lot-timer {
+        top: 10px;
+        right: 10px;
+        padding: 6px 12px;
+        font-size: 12px;
+        gap: 5px;
+    }
+
+    .filter-tabs {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filter-tab {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        position: static;
+        gap: 16px;
+        padding: 0 10px;
+    }
+
+    .footer-nav {
+        order: 1;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .footer .social-icons {
+        order: 2;
+        position: static;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .lots-grid {
+        gap: 18px;
+    }
+
+    .lot-card {
+        padding: 12px;
+    }
+
+    .lot-image-container {
+        min-height: 220px;
+    }
+
+    .lot-timer {
+        top: 8px;
+        right: 8px;
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+}

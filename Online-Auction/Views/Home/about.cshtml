@@ -1,0 +1,152 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles/indexstyle.css">
+    <link rel="stylesheet" href="/styles/about.css">
+    <title>О проекте</title>
+</head>
+<body>
+    <div class="container">
+       
+        <header class="header">
+            <nav class="menu">
+                <ul class="nav nav-top">
+                    <li><a href="/">&#127968; Главная</a></li>
+                    <li><a href="/allresults">&#128203; Все лоты</a></li>
+                    <li><a href="/about">&#128187; О проекте</a></li>
+                    <li><a href="/rules">&#128214; Правила</a></li>
+                </ul>
+            </nav>
+        </header>
+            <h1>&#128187; О проекте</h1>
+
+        <main class="main">
+      
+            <section class="about-hero">
+                <h2>Интернет-аукцион 2026</h2>
+                <p>Современная платформа для безопасных онлайн-торгов</p>
+            </section>
+
+            @* Описание проекта *@
+            <section class="about-section">
+                <h3>&#128214; О проекте</h3>
+                <p>
+                    Данный веб-сайт разработан в рамках дипломного проекта
+                    и представляет собой полноценную платформу для проведения
+                    онлайн-аукционов. Система позволяет пользователям регистрироваться,
+                    создавать лоты, участвовать в торгах и отслеживать статус своих покупок.
+                </p>
+                <p>
+                    Проект реализован с использованием современных технологий
+                    <strong>ASP.NET Core MVC</strong>, <strong>Entity Framework Core</strong>
+                    и базы данных <strong>PostgreSQL</strong>, что обеспечивает
+                    высокую производительность, безопасность и масштабируемость.
+                </p>
+            </section>
+
+            @* Возможности *@
+            <section class="about-section">
+                <h3>&#9989; Возможности платформы</h3>
+                <ul class="features-list">
+                    <li>
+                        <span class="feature-icon">&#128100;</span>
+                        <strong>Регистрация и авторизация</strong>
+                        <p>Безопасный вход с хешированием паролей и разделением ролей (Пользователь, Администратор)</p>
+                    </li>
+                    <li>
+                        <span class="feature-icon">&#128293;</span>
+                        <strong>Создание и управление лотами</strong>
+                        <p>Продавцы могут добавлять товары с фото, описанием, ценой и датой окончания аукциона</p>
+                    </li>
+                    <li>
+                        <span class="feature-icon">&#128176;</span>
+                        <strong>Система ставок в реальном времени</strong>
+                        <p>Участники делают ставки, текущая цена обновляется автоматически, победитель определяется по таймеру</p>
+                    </li>
+                    <li>
+                        <span class="feature-icon">&#128465;</span>
+                        <strong>Личный кабинет и история покупок</strong>
+                        <p>Пользователи видят свои активные ставки, выигранные лоты и могут оплачивать покупки</p>
+                    </li>
+                    <li>
+                        <span class="feature-icon">&#128269;</span>
+                        <strong>Фильтрация и поиск</strong>
+                        <p>Удобная навигация по категориям, фильтрация по статусу аукциона (активные / завершённые)</p>
+                    </li>
+                    <li>
+                        <span class="feature-icon">&#128274;</span>
+                        <strong>Безопасность данных</strong>
+                        <p>Защита от CSRF-атак, валидация на сервере, хранение паролей в хешированном виде</p>
+                    </li>
+                </ul>
+            </section>
+
+            @* Технологии *@
+            <section class="about-section">
+                <h3>&#128187; Технологический стек</h3>
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <span class="tech-icon">&#128293;</span>
+                        <h4>Backend</h4>
+                        <p>C# / ASP.NET Core MVC / Entity Framework Core</p>
+                    </div>
+                    <div class="tech-card">
+                        <span class="tech-icon">&#128429;</span>
+                        <h4>Frontend</h4>
+                        <p>HTML5 / CSS3 / Razor Views / JavaScript</p>
+                    </div>
+                    <div class="tech-card">
+                        <span class="tech-icon">&#128427;</span>
+                        <h4>База данных</h4>
+                        <p>PostgreSQL с миграциями EF Core</p>
+                    </div>
+                    <div class="tech-card">
+                        <span class="tech-icon">&#128274;</span>
+                        <h4>Безопасность</h4>
+                        <p>Cookie Authentication / [Authorize] / AntiForgeryToken</p>
+                    </div>
+                </div>
+            </section>
+
+            @* Автор *@
+            <section class="about-section author-section">
+                <h3>&#127893; Автор проекта</h3>
+                <div class="author-card">
+                    <div class="author-avatar">&#128100;</div>
+                    <div class="author-info">
+                        <p><strong>ФИО:</strong> Морозова Майя Алексеевна</p>
+                        <p><strong>Учебное заведение:</strong> АНО ДПО Академия ТОП</p>
+                        <p><strong>Год защиты:</strong> 2026</p>
+                        <p><strong>Научный руководитель:</strong> Герасев А.А.</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <nav class="footer-nav">
+                    <a href="/allresults">Все лоты</a>
+                    <a href="/about">О проекте</a>
+                    <a href="/rules">Правила</a>
+                </nav>
+
+                <div class="social-icons">
+                    <span><img src="/images/github.png" alt="логотип" /></span>
+                    <span><img src="/images/vk.png" alt="логотип" /></span>
+                    <span><img src="/images/MAX-32x32.png" alt="логотип" /></span>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Интернет-аукцион. Все права защищены.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

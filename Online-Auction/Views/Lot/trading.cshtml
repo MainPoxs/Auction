@@ -1,0 +1,308 @@
+﻿@using Online_Auction.Models
+@using System.Security.Claims
+@model Online_Auction.Models.Lot
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles/indexstyle.css">
+    <link rel="stylesheet" type="text/css" href="/styles/tradingstyle.css">
+    <title>Торги</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+</head>
+<body>
+    <div class="container">
+
+        <header class="header">
+            <nav class="menu">
+                <ul class="nav nav-top">
+                    <li><a href="/">&#127968; Главная</a></li>
+                    <li><a href="/allresults">&#128203; Все лоты</a></li>
+                    <li><a href="/about">&#128187; О проекте</a></li>
+                    <li><a href="/rules">&#128214; Правила</a></li>
+                </ul>
+                <ul class="nav nav-bottom">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="user-profile">
+                                <span class="name-account">@User.FindFirst("FirstName")?.Value</span>
+                                <a class="icon" href="/adminaccount">&#128100;</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="user-profile">
+                                <span class="name-account">@User.FindFirst("FirstName")?.Value</span>
+                                <a class="icon" href="/usaccount">&#128100;</a>
+                            </li>
+                        }
+                        <li class="user-profile"><a href="/logout">Выйти</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="/login">Войти</a></li>
+                        <li><a href="/registration">Регистрация</a></li>
+                    }
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main">
+            <div class="trading-layout">
+              
+                <section class="lot-info-card">                  
+                    <div class="container-card">
+                        <div class="box-card">
+                            <!-- Передняя грань с изображением лота -->
+                            <div class="face front">
+                                <img src="@Model.ImageUrl" alt="@Model.Title" class="lot-image">
+                            </div>
+
+                            <!-- Задняя грань с названием -->
+                            <div class="face back">
+                                <div class="face-content">
+                                    <h3>@Model.Title</h3>
+                                    <p class="lot-price">@Model.CurrentPrice ₽</p>
+                                </div>
+                            </div>
+
+                            <!-- Боковые грани  -->
+                            <div class="face right">
+                                <div class="face-content">
+                                    <p>Аукцион</p>
+                                    <span class="icon">⏱️Завершится: @Model.EndDate</span>
+                                </div>
+                            </div>
+
+                             <div class="face left">
+                                <div class="face-content">
+                                    <span class="icon">🏆</span>
+                                    <p>Лот #@Model.Id</p>
+                                </div>
+                            </div>
+                          
+                            <div class="face top">
+                                <div class="face-content">
+                                    <span class="icon">⭐</span>
+                                    <p>@Model.Category?.NameC</p>
+                                </div>
+                            </div>
+                        </div>                
+                    </div>
+
+                    <div class="lot-details">
+                        <h1 class="lot-title">@Model.Title</h1>
+                        <div class="lot-meta">
+                            <span class="category-tag">@Model.Category?.NameC</span>
+                            <span class="lot-id">Лот @Model.Id</span>
+                        </div>
+
+                        <div class="description-block">
+                            <h3>Описание</h3>
+                            <p>@Model.DescriptionLot</p>
+                        </div>
+
+                        <div class="seller-info">
+                            <h3>Продавец</h3>
+                            <div class="seller-row">
+                                <span>@Model.Seller.FirstName @Model.Seller.LastName</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bidding-panel">
+                 
+                    <div class="price-card">
+                        <div class="price-label">Текущая ставка</div>
+                        <div id="currentPrice" class="current-price">@Model.CurrentPrice &#8381;</div>
+                        <div class="min-bid-info">
+                            Шаг: @Model.Auction?.MinbidIncrement &#8381;
+                        </div>
+                    </div>
+
+                    <!-- Таймер -->
+                    <div class="timer-card">
+                        <div class="timer-label">До окончания</div>
+                        <div class="timer-display" id="auction-timer" data-end="@Model.EndDate.ToString("o")">
+                            <div class="time-part"><span id="days">00</span>д</div>
+                            <div class="time-part"><span id="hours">00</span>ч</div>
+                            <div class="time-part"><span id="minutes">00</span>м</div>
+                            <div class="time-part"><span id="seconds">00</span>с</div>
+                        </div>
+                    </div>
+                
+                    @if (User.Identity.IsAuthenticated && Model.EndDate > DateTime.Now
+                        && Model.Status == LotStatus.Active)
+                    {
+                        <div class="bid-form-card">
+                            <h3>Сделать ставку</h3>
+
+                            @if (TempData["Error"] != null)
+                            {
+                                <div class="alert alert-error">
+                                    @TempData["Error"]
+                                </div>
+                            }
+                            @if (TempData["Success"] != null)
+                            {
+                                <div class="alert alert-success">
+                                    @TempData["Success"]
+                                </div>
+                            }
+
+                            <form action="/placeBid" method="post">
+
+                                @* защита от CSRF-атак *@
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="lotId" value="@Model.Id" />
+                                <div class="form-group">
+                                    <label>Ваша ставка</label>
+                                    <div class="input-with-icon">
+                                        <input id="amount" type="number"
+                                            name="amount" step="0.01" required />
+                                        <span class="currency-icon">&#8381;</span>
+                                    </div>
+                                </div>
+
+                                <button id="sendBtn" type="submit"
+                                    class="btn-bid-submit">Сделать ставку</button>
+
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="bid-disabled-card">
+                            <p>Торги недоступны</p>
+                        </div>
+                    }
+                </section>
+            </div>
+          
+            <section class="bids-history-section">
+                <h2>История ставок</h2>
+
+                @if (Model.Bids != null && Model.Bids.Any())
+                {
+                    <table class="bids-table">
+                        <thead>
+                            <tr>
+                                <th>Участник</th>
+                                <th>Сумма</th>                      
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var maxBid = Model.Bids.Any() ? Model.Bids.Max(b => b.Amount) : 0;
+                            }
+                            @foreach (var bid in Model.Bids.OrderByDescending(b => b.Amount).Take(10))
+                            {
+                                <tr class="@(bid.Amount == maxBid ? "bid-leading" : "")">
+                                    <td>
+                                        @bid.Bidder?.FirstName @bid.Bidder?.LastName
+                                        @if (bid.Amount == maxBid)
+                                        {
+                                            <span class="leading-badge">Лидер</span>
+                                        }
+                                    </td>
+                                    <td class="bid-amount">@bid.Amount &#8381;</td>                                 
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="no-bids-message">
+                        <p>Ставок пока нет</p>
+                    </div>
+                }
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <nav class="footer-nav">
+                    <a href="/allresults">Все лоты</a>
+                    <a href="/about">О проекте</a>
+                    <a href="/rules">Правила</a>
+                </nav>
+
+                <div class="social-icons">
+                    <span><img src="/images/github.png" alt="логотип" /></span>
+                    <span><img src="/images/vk.png" alt="логотип" /></span>
+                    <span><img src="/images/MAX-32x32.png" alt="логотип" /></span>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Интернет-аукцион. Все права защищены.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function updateTimer() {
+            const timerElement = document.getElementById('auction-timer');
+            if (!timerElement) return;
+
+            const endDate = new Date(timerElement.dataset.end);
+            const now = new Date();
+            const diff = endDate - now;
+
+            if (diff <= 0) {
+                timerElement.innerHTML = '<span class="time-expired">Торги завершены</span>';
+                return;
+            }
+
+            document.getElementById('days').textContent = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById('hours').textContent = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // SignalR
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/chat")
+            .withAutomaticReconnect()  // Авто-переподключение при обрыве
+            .build();
+
+        // Обработчик обновления цены
+        hubConnection.on("PriceUpdated", (data) => {
+            console.log("Price updated:", data);
+
+            // Обновляем цену
+            const priceNew = document.getElementById('currentPrice');
+                    priceNew.textContent = Number(data.newPrice) + ' ₽';
+                    
+            priceNew.classList.add('price-updated');
+        setTimeout(() => priceNew.classList.remove('price-updated'), 1000);
+        });
+     
+        hubConnection.start()
+        .then(function () {
+            document.getElementById("sendBtn").disabled = false;
+
+            // Вход в группу лота после подключения
+            const lotId = @Model.Id;  // Razor подставит ID лота
+
+            hubConnection.invoke("JoinLotGroup", lotId)
+            .catch(function (err) {
+                console.error("Ошибка входа в группу:", err.toString());
+            });
+        })
+        .catch(function (err) {
+            return console.error(err.toString());
+        });
+    </script>
+</body>
+</html>

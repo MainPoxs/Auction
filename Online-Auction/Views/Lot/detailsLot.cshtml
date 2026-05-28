@@ -1,0 +1,158 @@
+﻿@using Online_Auction.Models
+@model Online_Auction.Models.Lot
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles/indexstyle.css">
+    <link rel="stylesheet" href="/styles/detailstyle.css">
+    <title>@Model.Title - Детали лота</title>
+</head>
+<body>
+    <div class="container">
+
+        <header class="header">
+            <nav class="menu">
+                <ul class="nav nav-top">
+                    <li><a href="/">&#127968; Главная</a></li>
+                    <li><a href="/allresults">&#128203; Все лоты</a></li>
+                    <li><a href="/about">&#128187; О проекте</a></li>
+                    <li><a href="/rules">&#128214; Правила</a></li>
+                </ul>
+                <ul class="nav nav-bottom">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="user-profile">
+                                <span class="name-account">@User.FindFirst("FirstName")?.Value</span>
+                                <a class="icon" href="/adminaccount">&#128100;</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="user-profile">
+                                <span class="name-account">@User.FindFirst("FirstName")?.Value</span>
+                                <a class="icon" href="/usaccount">&#128100;</a>
+                            </li>
+                        }
+                        <li class="user-profile"><a href="/logout">Выйти</a></li>
+                    }
+                    else
+                    {
+                        <li class="user-profile"><a href="/login">Войти</a></li>
+                        <li class="user-profile"><a href="/registration">Регистрация</a></li>
+                    }
+                </ul>
+            </nav>
+        </header>
+
+        <main class="details-main">
+            <div class="details-layout">
+                
+                <div class="details-left">
+                    <div class="image-card">
+                        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                        {
+                            <img src="@Model.ImageUrl" alt="@Model.Title">
+                        }
+                        else
+                        {
+                            <div class="no-image">Нет изображения</div>
+                        }
+                    </div>
+
+                    <div class="info-card">
+                        <h1 class="lot-title">@Model.Title</h1>
+                        <div class="lot-meta">
+                            <span class="category-tag">@Model.Category?.NameC</span>
+                            <span class="lot-id">ID: #@Model.Id</span>
+                            <span class="status-badge
+                            @GetStatusClass(Model.Status)">@GetStatusText(Model.Status)</span>
+                        </div>
+
+                        <div class="description-block">
+                            <h3>Описание лота</h3>
+                            <p>@(string.IsNullOrWhiteSpace(Model.DescriptionLot)
+                                ? "Описание отсутствует" : Model.DescriptionLot)</p>
+                        </div>
+                    </div>
+                </div>
+
+              
+                <div class="details-right">
+                    <div class="card price-card">
+                        <span class="label">Текущая ставка</span>
+                        <div class="price-value">@Model.CurrentPrice ₽</div>
+                        <div class="hint">Минимальный шаг: 10 ₽</div>
+                    </div>                 
+
+                    <div class="card seller-card">
+                        <h3>Продавец</h3>
+                        <div class="seller-row">
+                            <span class="icon">&#128100;</span>
+                            <span>@(Model.Seller?.FirstName ?? "Неизвестно") @(Model.Seller?.LastName ?? "")</span>
+                        </div>
+                    </div>
+
+                    <div class="card actions-card">
+                        @if (Model.Status == LotStatus.Active && Model.EndDate > DateTime.Now)
+                        {
+                            <a href="/trading/@Model.Id" class="btn-primary">&#128293; Участвовать в торгах</a>
+                        }                        
+                        else
+                        {
+                            <div class="status-box neutral">Статус: @GetStatusText(Model.Status)</div>
+                        }
+                    </div>
+                </div>
+            </div>
+           
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <nav class="footer-nav">
+                    <a href="/allresults">Все лоты</a>
+                    <a href="/about">О проекте</a>
+                    <a href="/rules">Правила</a>
+                </nav>
+
+                <div class="social-icons">
+                    <span><img src="/images/github.png" alt="логотип" /></span>
+                    <span><img src="/images/vk.png" alt="логотип" /></span>
+                    <span><img src="/images/MAX-32x32.png" alt="логотип" /></span>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Интернет-аукцион. Все права защищены.</p>
+            </div>
+        </footer>
+    </div>
+
+    @* Вспомогательные функции для статусов *@
+    @functions {
+        string GetStatusClass(LotStatus status) => status switch
+        {
+            LotStatus.Active => "active",
+            LotStatus.Review => "review",
+            LotStatus.Sold => "sold",
+            LotStatus.Blocked => "blocked",
+            _ => "default"
+        };
+
+        string GetStatusText(LotStatus status) => status switch
+        {
+            LotStatus.Active => "Активен",
+            LotStatus.Review => "На проверке",
+            LotStatus.Sold => "Продан",
+            LotStatus.Blocked => "Заблокирован",
+            _ => "Неизвестно"
+        };
+    }
+</body>
+</html>

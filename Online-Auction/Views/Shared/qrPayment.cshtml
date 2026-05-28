@@ -1,0 +1,38 @@
+﻿@using Online_Auction.Models
+@model Online_Auction.Models.Purchase
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles/indexstyle.css">
+    <link rel="stylesheet" href="/styles/paystyleQR.css">
+    <title>Оплата по QR</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Подтверждение оплаты</h1>
+
+        <div class="qr-payment-container">
+            <h3 class="qr-title">Детали заказа</h3>
+
+            <div class="lot-details-qr">
+                <p><strong>📦 Лот:</strong> @Model.Lot?.Title</p>
+                <p><strong>💰 Сумма:</strong> @Model.FinalPrice ₽</p>
+                <p><strong>👤 Продавец:</strong> @Model.Seller?.FirstName @Model.Seller?.LastName</p>
+                <p><strong>📅 Дата покупки:</strong> @Model.PurchaseDate</p>
+            </div>
+
+            <p class="qr-hint">Нажмите кнопку ниже, чтобы подтвердить оплату</p>
+
+            <form method="post" action="/pay/confirm/@Model.LotId" class="qr-confirm-form">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn-qr-confirm">✅ Оплатить по QR</button>
+            </form>
+
+            <a href="/mypurchases" class="back-link">← Вернуться к покупкам</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles/indexstyle.css">
+    <link rel="stylesheet" href="/styles/adminstyle.css">
+    <title>Администратор</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="menu-admin">                
+                <span>&#9881; Администратор</span>
+                <form action="/logout" method="get">
+                    <a href="/" class="back-link">На главную</a>
+                    <a href="/usaccount" class="back-link">Кабинет</a>
+                    <button type="submit" class="logout-link">Выйти</button>
+                </form>             
+            </div>
+        </div>         
+
+        <div class="dashboard">
+            <a href="/admin/userManagement" class="card">&#128101; Управление пользователями</a>
+            <a href="/admin/adminMessages" class="card">&#128232; Сообщения</a>
+            <a href="/admin/pendingLot" class="card">&#127942; Новые аукционы</a>
+            <a href="/admin/pendingAllLots" class="card">&#11088; Управление аукционами</a>
+        </div>
+        <footer class="footer">
+            <div class="footer-content">
+                <nav class="footer-nav">
+                    <a href="/allresults">Все лоты</a>
+                    <a href="/about">О проекте</a>
+                    <a href="/rules">Правила</a>
+                </nav>
+
+                <div class="social-icons">
+                    <span><img src="/images/github.png" alt="логотип" /></span>
+                    <span><img src="/images/vk.png" alt="логотип" /></span>
+                    <span><img src="/images/MAX-32x32.png" alt="логотип" /></span>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Интернет-аукцион. Все права защищены.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

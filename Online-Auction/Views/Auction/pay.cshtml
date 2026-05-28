@@ -1,0 +1,87 @@
+﻿@using Online_Auction.Models
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles/indexstyle.css">
+    <link rel="stylesheet" href="/styles/paystyle.css">
+    <title>Оплата заказа</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Оплата заказа</h1>
+
+        <form method="post" action="/success" class="card-form">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="lotId" value="@Model.Id" />
+
+            <h3>Данные банковской карты</h3>
+
+            <div class="card-icon">
+                <input type="text" class="card-input" name="cardNumber"
+                       placeholder="Номер карты (16 цифр)" maxlength="16" required>
+            </div>
+
+            <div class="card-row">
+                <input type="text" class="card-input" name="cardExpiry"
+                       placeholder="ММ/ГГ" maxlength="5" required>
+                <input type="text" class="card-input" name="cardCvv"
+                       placeholder="CVV" maxlength="3" required>
+            </div>
+
+            <input type="text" class="card-input" name="cardName"
+                   placeholder="Имя и фамилия на карте" required>
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="error-msg" style="color:#e53e3e; margin:10px 0; font-weight:500;">
+                    &#9888; @TempData["Error"]
+                </div>
+            }
+
+            <p>&#128274; Ваши данные защищены (тестовый режим).</p>
+            <button type="submit" class="btn-pay">Оплатить</button>
+        </form>
+
+        <!-- Секция QR-оплаты -->
+        <div class="qr-payment-container">
+            <h3 class="qr-title">Оплата по QR-коду</h3>
+            <p class="qr-hint">Отсканируйте код для симуляции оплаты</p>
+            @{
+                // Cсылкf на подтверждение оплаты
+                var confirmationUrl = Url.Action(
+                action: "ConfirmPaymentByQR",
+                controller: "Purchase",
+                values: new { lotId = Model.Id },
+                protocol: Context.Request.Scheme 
+                );
+
+                // Кодируем для QR-кода
+                var encodedData = System.Net.WebUtility.UrlEncode(confirmationUrl);
+            }
+
+            <img class="qr-image"
+                 src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=@encodedData"
+                 alt="QR Code for Payment">
+            <p class="qr-note">Сумма к оплате: <strong>@Model.CurrentPrice ₽</strong></p>
+        </div>
+
+        <!-- Подсказка -->
+        <div class="qr-instruction">
+            <small>
+                &#128203; При сканировании телефон покажет ссылку на оплату.
+                Для подтверждения оплаты нажмите кнопку ниже.
+            </small>
+        </div>
+        <div>
+            <a href="/" class="back-link">На главную</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

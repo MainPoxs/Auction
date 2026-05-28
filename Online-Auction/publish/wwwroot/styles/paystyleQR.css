@@ -1,0 +1,150 @@
+﻿h1 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================================
+   КАРТОЧКА ОПЛАТЫ
+   ========================================= */
+.qr-payment-container {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    text-align: left;
+}
+
+.qr-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: rgba(255, 255, 255, 0.95);
+    text-align: center;
+}
+
+/* Блок с деталями заказа */
+.lot-details-qr {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 16px;
+    margin: 0 0 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+    .lot-details-qr p {
+        margin: 8px 0;
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .lot-details-qr strong {
+        color: #fff;
+        margin-right: 6px;
+        display: inline-block;
+        min-width: 100px;
+    }
+
+/* Подсказка */
+.qr-hint {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 14px;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+/* =========================================
+   КНОПКА ОПЛАТЫ
+   ========================================= */
+.qr-confirm-form {
+    margin-bottom: 16px;
+}
+
+.btn-qr-confirm {
+    width: 100%;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+    .btn-qr-confirm:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(39, 174, 96, 0.6);
+        background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    }
+
+    .btn-qr-confirm:active {
+        transform: translateY(-1px);
+    }
+
+/* Ссылка "Назад" */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+}
+
+    .back-link:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateX(-4px);
+    }
+
+/* =========================================
+   АДАПТИВНОСТЬ
+   ========================================= */
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+
+    .container.qr-page {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .qr-payment-container {
+        padding: 18px;
+    }
+
+    .lot-details-qr strong {
+        min-width: 80px;
+    }
+
+    .lot-details-qr p {
+        font-size: 14px;
+    }
+
+    .btn-qr-confirm {
+        font-size: 15px;
+        padding: 12px;
+    }
+}

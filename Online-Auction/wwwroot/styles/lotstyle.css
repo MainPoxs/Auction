@@ -1,0 +1,403 @@
+﻿
+h2 {
+    color: white;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================================
+   ФОРМА СОЗДАНИЯ ЛОТА
+   ========================================= */
+form {
+    width: 100%;
+    max-width: 650px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Лейблы */
+label {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* Поля ввода */
+input[type="text"],
+input[type="number"],
+input[type="datetime-local"],
+input[type="file"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 15px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+/* Фокус */
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 3px rgba(23, 98, 166, 0.3);
+}
+
+/* Textarea */
+textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+/* Select */
+select {
+    cursor: pointer;
+    appearance: none;       
+    background-position: right 16px center;
+    padding-right: 40px;
+}
+
+select option {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 8px;
+}
+
+/* File Input */
+input[type="file"] {
+    padding: 10px;
+    cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 12px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* =========================================
+   КНОПКИ И ССЫЛКИ
+   ========================================= */
+button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #1762A6 0%, #2E6A9D 100%);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(23, 98, 166, 0.3);
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(23, 98, 166, 0.5);
+    background: linear-gradient(135deg, #2E6A9D 0%, #738CA2 100%);
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 18px;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+    margin-bottom: 20px;
+}
+
+.back-link:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-4px);
+}
+
+/* =========================================
+   FOOTER 
+   ========================================= */
+.footer {
+    width: 100%;
+    padding: 25px 20px 20px;
+    background: rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 20px;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 32px;
+}
+
+.footer-nav a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.footer-nav a:hover {
+    color: #fff;
+}
+
+.footer-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.8);
+    transition: width 0.3s ease;
+}
+
+.footer-nav a:hover::after {
+    width: 100%;
+}
+
+.footer .social-icons {
+    position: absolute;
+    right: 0;
+    display: flex;
+    gap: 12px;
+}
+
+.footer .social-icons span {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.footer .social-icons span:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.footer-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent 0%,
+    rgba(255, 255, 255, 0.3) 20%,
+    rgba(255, 255, 255, 0.3) 80%, transparent 100%);
+    margin: 20px 0 15px;
+}
+
+.footer-bottom p {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+        padding: 20px 16px;
+        border-radius: 20px;
+    }
+
+    form {
+        padding: 24px 18px;
+        gap: 16px;
+    }
+
+    h2 {
+        font-size: 24px;
+        margin-bottom: 24px;
+    }
+
+    label {
+        font-size: 13px;
+        margin-bottom: 4px;
+    }
+
+    input, textarea, select, button[type="submit"] {
+        font-size: 14px;
+        padding: 12px 14px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .footer-nav {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .footer .social-icons {
+        position: static;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 16px 12px;
+    }
+
+    form {
+        padding: 20px 14px;
+        gap: 14px;
+    }
+
+    h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    input, textarea, select {
+        padding: 11px 12px;
+        font-size: 14px; 
+    }
+
+    button[type="submit"] {
+        font-size: 15px;
+        padding: 13px;
+        min-height: 48px;
+    }
+
+    .back-link {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+        margin-top: 10px;
+    }
+
+    .footer .social-icons {
+        position: static;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 360px) {
+    h2 {
+        font-size: 20px;
+    }
+
+    label {
+        font-size: 12px;
+    }
+
+    input, textarea, select, button[type="submit"] {
+        font-size: 13px;
+    }
+
+        input[type="file"]::file-selector-button {
+            font-size: 12px;
+            padding: 8px 12px;
+        }
+}
+
+@media (max-height: 600px) and (orientation: landscape) {
+    .container {
+        padding: 12px 20px;
+        margin: 5px auto;
+    }
+
+    form {
+        max-height: 85vh;
+        overflow-y: auto;
+        padding: 16px;
+        gap: 10px;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin-bottom: 12px;
+    }
+
+    input, textarea, select {
+        padding: 8px 12px;
+    }
+
+    button[type="submit"] {
+        padding: 10px;
+        min-height: 40px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    button[type="submit"]:hover, .back-link:hover {
+        transform: none !important;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    
+    button[type="submit"]:hover, .back-link:hover {
+        transform: none !important;
+        box-shadow: 0 4px 15px rgba(23, 98, 166, 0.3) !important;
+    }
+
+    button[type="submit"]:active, .back-link:active {
+        transform: scale(0.98) !important;
+        opacity: 0.9;
+    }
+}

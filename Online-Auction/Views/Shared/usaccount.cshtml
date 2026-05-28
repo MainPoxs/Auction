@@ -1,0 +1,119 @@
+﻿@using Online_Auction.Models
+@using System.Security.Claims
+@model List<Online_Auction.Models.Lot> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles/indexstyle.css">
+    <link rel="stylesheet" type="text/css" href="styles/accountstyle.css">
+    <title>Личный кабинет</title>
+</head>
+<body>
+    <div class="main-container">
+        <div class="header">
+            <div class="menu-user">
+                <a href="/" class="back-link">&#127968; На главную</a>
+                <a href="/mypurchases" class="back-link">&#128188;Мои покупки</a>
+                <div class="top-section">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="/usaccount" class="user-link">&#128100;</a>
+                    }
+                    <div class="user-info">
+                        <a href="/logout">Выйти</a>
+                    </div>           
+                </div>
+            </div>
+        </div>
+        <div class="lots-section">
+            <h3>Мои лоты</h3>
+             @if (Model != null && Model.Any())
+            {
+            <div class="lots-grid">
+                @foreach (var lot in Model)
+                {
+                    <div class="lots-card">
+                        <h4>@lot.Title</h4>
+                        <div class="lot-img_desc">
+                            <img src="@lot.ImageUrl" alt="@lot.Title">
+                            <p class="lot-desc">@lot.DescriptionLot</p>
+                        </div>
+                        <div class="lot-status">
+                                <div class="lot-desc">
+                                Статус лота: 
+                                @if(@lot.Status == LotStatus.NotActive)
+                                    {
+                                        <p>&#10060;Не активен</p>
+                                    }
+
+                                @if (@lot.Status == LotStatus.Review)
+                                    {
+                                        <p>&#8987;На проверке</p>
+                                    }
+
+                                @if (@lot.Status == LotStatus.Active)
+                                    {
+                                        <p>&#9989;Активен</p>
+                                    }
+
+                                @if (@lot.Status == LotStatus.Sold)
+                                    {
+                                        <p>&#128465;Продан</p>
+                                    }
+
+                                @if (@lot.Status == LotStatus.Blocked)
+                                    {
+                                        <p>&#128274;Заблокирован</p>
+                                    }
+
+                                @if (@lot.Status == LotStatus.Upblocked)
+                                    {
+                                        <p>&#128275;Разблокирован</p>
+                                    }
+                            </div>
+                        </div>
+
+                            <div class="lot-actions">
+
+                                @if (lot.Status == LotStatus.Review || lot.Status == LotStatus.NotActive)
+                                {
+                                    <a href="/lot/edit/@lot.Id" class="btn-edit">&#9998; Редактировать</a>                                   
+                                }
+                                <a href="/details/@lot.Id" class="details-link">Детали</a>
+                            </div>
+                    </div>
+                }
+            </div>
+            }       
+        </div>
+        
+        <div class="actions">
+            <a href="/createlot" class="btn-add">Создать лот</a>
+        </div>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <nav class="footer-nav">
+                <a href="/allresults">Все лоты</a>
+                <a href="/about">О проекте</a>
+                <a href="/rules">Правила</a>
+            </nav>
+
+            <div class="social-icons">
+                <span><img src="/images/github.png" alt="логотип" /></span>
+                <span><img src="/images/vk.png" alt="логотип" /></span>
+                <span><img src="/images/MAX-32x32.png" alt="логотип" /></span>
+            </div>
+        </div>
+
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Интернет-аукцион. Все права защищены.</p>
+        </div>
+    </footer>
+    </div>
+</body>
+</html>

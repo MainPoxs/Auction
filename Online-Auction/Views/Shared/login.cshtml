@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles/indexstyle.css">
+    <link rel="stylesheet" type="text/css" href="/styles/regstyle.css">   
+    <link rel="stylesheet" type="text/css" href="/styles/login.css">
+    <title>Вход</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card-container">
+            <div class="image-overlay">
+                <h2>Нет аккаунта?</h2>
+                <a class="mini-btn" href="/registration">Зарегистрироваться &#10140;</a>
+            </div>
+
+            <div class="form-side">
+                <div class="form-wrapper">
+                    <h2 class="form-title">Вход</h2>
+                        @* Блокировка *@
+                        @if (TempData["BlockUser"] != null)
+                        {
+                           <div class="alert alert-error">          
+                               <p>@TempData["BlockUser"]</p>
+                               <a href="/contact-admin" class="btn-hero">
+                                   &#128233; Написать администратору
+                               </a>
+                           </div>
+                        }
+
+                        @* Ошибка логина/пароля *@
+                        else if (TempData["Error"] != null)
+                        {
+                           <div class="alert alert-error">@TempData["Error"]</div>
+                        }
+
+                        @* Пустые поля *@
+                        else if (TempData["Empty"] != null)
+                        {
+                           <div class="alert alert-warning">@TempData["Empty"]</div> 
+                        }
+                    <form method="post" action="/login">
+                        @* защита от CSRF-атак *@
+                        @Html.AntiForgeryToken()
+
+                        <div class="input-group">
+                            <input id="loginUs" type="text" name="loginUs"
+                                placeholder="Логин" required>
+                        </div>
+
+                        <div class="input-group">
+                            <input id="password" type="password" name="password"
+                                placeholder="Пароль" required>
+                        </div>
+
+                        <button type="submit" class="btn-submit">Войти</button>
+                    </form>
+
+                    <div class="footer-links">
+                        <p>Есть вопросы? Свяжитесь с нами:</p>
+                        <div class="social-icons">
+                            <span><img src="/images/github.png" alt="логотип" /></span>
+                            <span><img src="/images/vk.png" alt="логотип" /></span>
+                            <span><img src="/images/MAX-32x32.png" alt="логотип" /></span>
+                        </div>
+                    </div>      
+              
+                </div>
+            </div>
+        </div>
+        <a href="/" class="back-home">&#8592; На главную</a>
+    </div>
+</body>
+</html>

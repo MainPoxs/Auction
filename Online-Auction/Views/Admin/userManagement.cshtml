@@ -1,0 +1,116 @@
+﻿@using Online_Auction.Models
+@model List<Online_Auction.Models.User>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles/indexstyle.css">
+    <link rel="stylesheet" href="/styles/adminstyle.css">
+    <link rel="stylesheet" type="text/css" href="/styles/usmanagementstyle.css">
+    <title>Управление пользователями</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="menu-admin">
+                <span>&#9881; Администратор</span>
+                <form action="/logout" method="get">
+                    <a href="/" class="back-link">На главную</a>
+                    <a href="/adminaccount" class="back-link">&#9881; Панель админа</a>
+                    <button type="submit" class="logout-link">Выйти</button>
+                </form>
+            </div>
+        </div>
+
+    <h2>Управление пользователями</h2>
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-error">@TempData["Error"]</div>
+    }
+    <table class="table">
+        <thead>
+            <tr class="table-thead">
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Эл.почта</th>               
+                <th>Статус</th>
+                <th>Блокировка</th> 
+                <th>Сообщение</th> 
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in ViewBag.Users)
+            {
+                <tr>
+                    <td data-label="Имя">@user.FirstName</td>
+                    <td data-label="Фамилия">@user.LastName</td>
+                    <td data-label="Email">@user.Email</td>
+                    <td data-label="Статус">
+                        @if (user.IsBanned)
+                        {
+                            <span>Заблокирован</span>
+                        }
+                        else
+                        {
+
+                            <span>Разблокирован</span>
+                        }
+                    </td>
+                    <td data-label="Кнопка блокировки">
+                        <form method="post" action="/admin/user/@user.Id/status" class="status-form">
+
+                            @* защита от CSRF-атак *@
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            @if (user.IsBanned)
+                            {
+                                <button type="submit" name="status" value="unblock" class="btn-unblock">
+                                    &#128275; Разблокировать
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="submit" name="status" value="block" class="btn-block">
+                                    &#128274; Заблокировать
+                                </button>
+                            }
+                        </form>
+                    </td>
+                    <td data-label ="Отправить сообщение">
+                        <div class="chat-link">
+                            <a href="#">Написать сообщение</a>
+                        </div>
+                    </td data-label>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <footer class="footer">
+            <div class="footer-content">
+                <nav class="footer-nav">
+                    <a href="/allresults">Все лоты</a>
+                    <a href="/about">О проекте</a>
+                    <a href="/rules">Правила</a>
+                </nav>
+
+                <div class="social-icons">
+                    <span><img src="/images/github.png" alt="логотип" /></span>
+                    <span><img src="/images/vk.png" alt="логотип" /></span>
+                    <span><img src="/images/MAX-32x32.png" alt="логотип" /></span>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Интернет-аукцион. Все права защищены.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

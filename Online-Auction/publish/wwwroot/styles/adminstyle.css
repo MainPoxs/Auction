@@ -1,0 +1,281 @@
+﻿.header {
+    position: relative;
+    z-index: 10;
+    padding: 15px 30px;
+    width: 100%;
+}
+
+.menu-admin {
+    max-width: 1400px;
+    margin: 0 auto; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px; 
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 10px 20px; 
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.menu-admin span {
+    color: #fff;
+    font-size: 16px; 
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.menu-admin form {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+.back-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 16px; 
+    border-radius: 10px;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.back-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.logout-link {
+    padding: 10px 16px;
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid transparent;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background-color: transparent;
+}
+
+.logout-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+/* =========================================
+   ДАШБОРД С КАРТОЧКАМИ
+   ========================================= */
+.dashboard {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    padding: 20px 5px;
+    align-content: start;
+}
+
+/* Карточка дашборда */
+.card {
+    display: flex;
+    align-items: center;
+    padding: 45px 36px;
+    min-height: 160px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Градиентная полоска сверху */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg,
+    #1762A6, #2E6A9D, #738CA2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-8px);
+    box-shadow: 0 25px 60px rgba(23, 98, 166, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+/* ================
+Иконки
+=================== */
+
+.card::first-letter {
+    font-size: 42px;
+    display: inline-block;
+    width: 72px;
+    height: 72px;
+    line-height: 72px; 
+    text-align: center;
+    margin-right: 24px; 
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+/* Анимация иконки при наведении */
+.card:hover::first-letter {
+    transform: scale(1.1) rotate(5deg);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* =========================================
+   АДАПТИВНОСТЬ
+   ========================================= */
+
+@media (max-width: 768px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .menu-admin {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .menu-admin form {
+        width: 100%;
+        justify-content: space-between;
+    }
+ 
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+        padding: 0 10px;
+    }
+
+    .footer-nav {
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .footer .social-icons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px 10px;
+        border-radius: 20px;
+    }
+
+    .menu-admin {
+        padding: 12px 18px;
+    }
+
+    .menu-admin span {
+        font-size: 16px;
+    }
+
+    .back-link,
+    .logout-link {
+        padding: 7px 14px;
+        font-size: 13px;
+    }
+
+    .card {
+        padding: 24px 20px;   
+    }
+
+    .card::first-letter {
+        font-size: 24px;
+        width: 42px;
+        height: 42px;
+        line-height: 42px;
+        margin-right: 14px;
+    }
+
+    .card {
+        font-size: 15px;
+    }
+
+    .footer {
+        padding: 24px 15px;
+    }
+}
+
+/* =========================================
+   ДОПОЛНИТЕЛЬНЫЕ ЭФФЕКТЫ 
+   ========================================= */
+
+/* Пульсация для важных карточек */
+.card.important {
+    border-color: rgba(239, 68, 68, 0.4);
+    animation: pulse-border 3s infinite;
+}
+
+@keyframes pulse-border {
+    0%, 100% {
+        border-color: rgba(239, 68, 68, 0.4);
+    }
+
+    50% {
+        border-color: rgba(239, 68, 68, 0.7);
+    }
+}
+
+/* Бейдж */
+.card .badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 4px 10px;
+    background: rgba(239, 68, 68, 0.9);
+    color: #fff;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+}

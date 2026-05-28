@@ -1,0 +1,1141 @@
+﻿.header {
+    position: relative;
+    z-index: 10;
+    padding: 15px 30px;
+    width: 100%;
+}
+
+.menu {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 10px 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.nav {
+    display: flex;
+    list-style: none;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav li a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+}
+
+.nav li a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 14px;
+    border-radius: 12px;
+}
+
+.name-account {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.user-profile .icon {
+    color: #fff;
+    font-size: 18px;
+    transition: transform 0.2s ease;
+}
+
+.user-profile .icon:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* =========================================
+   3D-КАРТОЧКА ЛОТА 
+   ========================================= */
+.container-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1200px;
+    padding: 60px 20px; 
+}
+
+.box-card {
+    width: 200px;
+    height: 300px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(-15deg) rotateY(25deg);
+    animation: rotateCube 18s infinite linear;
+    cursor: pointer;
+}
+
+.box-card:hover {
+    animation-play-state: paused;
+}
+
+/* Базовая грань */
+.face {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,0.15);
+    backface-visibility: hidden;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+}
+
+.front {
+    width: 200px;
+    height: 300px;
+    transform: translateZ(100px);
+    background: linear-gradient(145deg, #1a1a2e, #16213e);
+}
+
+.back {
+    width: 200px;
+    height: 300px;
+    transform: rotateY(180deg) translateZ(100px);
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.left {
+    width: 200px;
+    height: 300px;
+    transform: rotateY(-90deg) translateZ(100px);
+    background: linear-gradient(145deg, #533483, #16213e);
+    border-color: #9c27b0;
+}
+
+.right {
+    width: 200px;
+    height: 300px;
+    transform: rotateY(90deg) translateZ(100px);
+    background: linear-gradient(145deg, #0f3443, #16213e);
+    border-color: #00bcd4;
+}
+
+.top {
+    width: 200px;
+    height: 200px;
+    transform: rotateX(90deg) translateZ(100px); 
+    background: linear-gradient(145deg, #e94560, #533483);
+    border-color: #ffc107;
+}
+
+.bottom {
+    width: 200px;
+    height: 200px;
+    transform: rotateX(-90deg) translateZ(150px);
+    background: linear-gradient(145deg, #1a1a2e, #0f3443);
+    border-color: #4caf50;
+}
+
+/* Контент внутри граней */
+.face-content {
+    text-align: center;
+    color: #fff;
+    padding: 10px;
+    z-index: 2;
+}
+
+.face-content h3 {
+    font-size: 12px;
+    margin: 0 0 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.face-content p {
+    font-size: 11px;
+    opacity: 0.9;
+    margin: 3px 0;
+}
+
+.lot-price {
+    font-size: 18px !important;
+    color: #ffd700;
+    font-weight: 700;
+}
+
+.face-content .icon {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.lot-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: rgba(0,0,0,0.1);
+}
+
+@keyframes rotateCube {
+    0% {
+        transform: rotateX(-15deg) rotateY(0deg);
+    }
+
+    25% {
+        transform: rotateX(-15deg) rotateY(90deg);
+    }
+
+    50% {
+        transform: rotateX(-15deg) rotateY(180deg);
+    }
+
+    75% {
+        transform: rotateX(-15deg) rotateY(270deg);
+    }
+
+    100% {
+        transform: rotateX(-15deg) rotateY(360deg);
+    }
+}
+
+.trading-layout {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.lot-info-card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+}
+
+.lot-details {
+    padding: 25px;
+}
+
+.lot-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 15px 0;
+}
+
+.lot-meta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.category-tag {
+    background: rgba(102, 126, 234, 0.1);
+    color: #1a4d7a;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.lot-id {
+    color: #999;
+    font-size: 13px;
+}
+
+.description-block h3,
+.seller-info h3 {
+    font-size: 16px;
+    color: #1a4d7a;
+    margin: 0 0 10px 0;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #667eea15;
+}
+
+.description-block p {
+    color: #555;
+    line-height: 1.7;
+    margin: 0 0 25px 0;
+}
+
+.seller-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+    font-weight: 500;
+}
+
+.bidding-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.price-card,
+.timer-card,
+.bid-form-card {
+    background: #fff;
+    border-radius: 10px;
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    padding: 30px;
+}
+
+.price-label {
+    font-size: 13px;
+    color: #1a4d7a;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.current-price {
+    font-size: 36px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #1762A6 0%, #2E6A9D 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.min-bid-info {
+    font-size: 13px;
+    color: #1a4d7a;
+    margin-top: 10px;
+}
+
+.timer-label {
+    font-size: 13px;
+    color: #1a4d7a;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.timer-display {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.time-part {
+    background: linear-gradient(135deg, #1762A6 0%, #2E6A9D 100%);
+    color: #fff;
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    min-width: 65px;
+    text-align: center;
+}
+
+.time-part span {
+    font-size: 24px;
+    display: block;
+}
+
+.bid-form-card h3 {
+    background: linear-gradient(135deg, #1762A6 0%, #2E6A9D 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 20px 0;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-icon input {
+    width: 100%;
+    padding: 12px 40px 12px 15px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.input-with-icon input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.currency-icon {
+    position: absolute;
+    right: 15px;
+    color: #999;
+    font-weight: 600;
+}
+
+.btn-bid-submit {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #1762A6 0%, #2E6A9D 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-bid-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.alert {
+    padding: 12px 16px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.alert-error {
+    background: #fee;
+    color: #c0392b;
+    border-left: 4px solid #e74c3c;
+}
+
+.alert-success {
+    background: #efe;
+    color: #27ae60;
+    border-left: 4px solid #27ae60;
+}
+
+.bids-history-section {
+    margin-top: 40px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+}
+
+.bids-history-section h2 {
+    color: #1a4d7a;
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 10px;
+}
+
+.bids-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bids-table th {
+    background: #667eea15;
+    color: #667eea;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.bids-table td {
+    padding: 14px 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.bids-table tbody tr:hover {
+    background: #f8f9ff;
+}
+
+.bid-leading {
+    background: rgba(39, 174, 96, 0.05);
+}
+
+.leading-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #27ae60, #219a52);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+.bid-amount {
+    font-weight: 700;
+    color: #667eea;
+    font-size: 16px;
+}
+
+/* =========================================
+   АДАПТИВНОСТЬ — МЕДИА-ЗАПРОСЫ
+   ========================================= */
+
+@media (max-width: 1024px) {
+    .trading-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .bidding-panel {
+        order: -1; 
+        max-width: 100%;
+    }
+
+    .box-card {
+        width: 180px;
+        height: 270px;
+        transform: rotateX(-10deg) rotateY(20deg) scale(0.95);
+    }
+
+    .front, .back, .left, .right {
+        width: 180px;
+        height: 270px;
+        transform: translateZ(90px);
+    }
+
+    .left {
+        transform: rotateY(-90deg) translateZ(90px);
+    }
+
+    .right {
+        transform: rotateY(90deg) translateZ(90px);
+    }
+
+    .back {
+        transform: rotateY(180deg) translateZ(90px);
+    }
+
+    .top {
+        width: 180px;
+        height: 180px;
+        transform: rotateX(90deg) translateZ(135px);
+    }
+
+    .lot-title {
+        font-size: 24px;
+    }
+
+    .current-price {
+        font-size: 32px;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .header {
+        padding: 10px 15px;
+    }
+
+    .menu {
+        flex-direction: column;
+        gap: 15px;
+        padding: 12px 15px;
+    }
+
+    .nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+    }
+
+        .nav li a {
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+
+    .user-profile {
+        flex-direction: column;
+        gap: 6px;
+        padding: 6px 10px;
+    }
+
+    .name-account {
+        font-size: 12px;
+    }
+
+    .container-card {
+        padding: 30px 10px;
+    }
+
+    .box-card {
+        width: 160px;
+        height: 240px;
+        transform: rotateX(-8deg) rotateY(18deg) scale(0.9);
+    }
+
+    .front, .back, .left, .right {
+        width: 160px;
+        height: 240px;
+        transform: translateZ(80px);
+    }
+
+    .left {
+        transform: rotateY(-90deg) translateZ(80px);
+    }
+
+    .right {
+        transform: rotateY(90deg) translateZ(80px);
+    }
+
+    .back {
+        transform: rotateY(180deg) translateZ(80px);
+    }
+
+    .top {
+        width: 160px;
+        height: 160px;
+        transform: rotateX(90deg) translateZ(120px);
+    }
+
+    .face-content h3 {
+        font-size: 10px;
+    }
+
+    .face-content p {
+        font-size: 9px;
+    }
+
+    .face-content .icon {
+        font-size: 18px;
+    }
+
+    .lot-price {
+        font-size: 16px !important;
+    }
+
+    .lot-details {
+        padding: 20px 15px;
+    }
+
+    .lot-title {
+        font-size: 22px;
+        margin-bottom: 12px;
+    }
+
+    .lot-meta {
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .category-tag, .lot-id {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+
+    .description-block h3,
+    .seller-info h3 {
+        font-size: 15px;
+        margin-bottom: 8px;
+    }
+
+    .description-block p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+
+    .price-card,
+    .timer-card,
+    .bid-form-card,
+    .bid-disabled-card {
+        padding: 20px 15px;
+        border-radius: 12px;
+    }
+
+    .price-label,
+    .timer-label {
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+
+    .current-price {
+        font-size: 28px;
+    }
+
+    .min-bid-info {
+        font-size: 12px;
+        margin-top: 8px;
+    }
+
+    .timer-display {
+        gap: 6px;
+    }
+
+    .time-part {
+        min-width: 55px;
+        padding: 10px 8px;
+        border-radius: 12px;
+    }
+
+        .time-part span {
+            font-size: 20px;
+        }
+
+        .time-part::after {
+            font-size: 11px;
+        }
+
+    .bid-form-card h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    .input-with-icon input {
+        padding: 12px 35px 12px 12px;
+        font-size: 15px;
+        min-height: 44px;
+    }
+
+    .currency-icon {
+        right: 12px;
+        font-size: 16px;
+    }
+
+    .btn-bid-submit {
+        padding: 14px;
+        font-size: 15px;
+        min-height: 48px;
+        border-radius: 10px;
+    }
+
+    .bids-history-section {
+        padding: 20px 15px;
+        margin-top: 30px;
+    }
+
+        .bids-history-section h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+        }
+
+    .bids-table {
+        font-size: 14px;
+    }
+
+        .bids-table th,
+        .bids-table td {
+            padding: 12px 10px;
+        }
+
+    .bid-amount {
+        font-size: 15px;
+    }
+
+    .leading-badge {
+        font-size: 10px;
+        padding: 2px 6px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .footer-nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+        .social-icons img {
+            width: 28px;
+            height: 28px;
+        }
+}
+
+
+@media (max-width: 480px) {
+
+    .nav li a {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+        .nav li a span:first-child {
+            font-size: 14px;
+        }
+
+    .user-profile .icon {
+        font-size: 16px;
+    }
+
+
+    .container-card {
+        padding: 20px 5px;
+    }
+
+    .box-card {
+        width: 140px;
+        height: 210px;
+        transform: rotateX(-5deg) rotateY(15deg) scale(0.85);
+    }
+
+    .front, .back, .left, .right {
+        width: 140px;
+        height: 210px;
+        transform: translateZ(70px);
+    }
+
+    .left {
+        transform: rotateY(-90deg) translateZ(70px);
+    }
+
+    .right {
+        transform: rotateY(90deg) translateZ(70px);
+    }
+
+    .back {
+        transform: rotateY(180deg) translateZ(70px);
+    }
+
+    .top {
+        width: 140px;
+        height: 140px;
+        transform: rotateX(90deg) translateZ(105px);
+    }
+
+    .face-content h3 {
+        font-size: 9px;
+    }
+
+    .face-content p {
+        font-size: 8px;
+    }
+
+    .face-content .icon {
+        font-size: 16px;
+    }
+
+    .lot-price {
+        font-size: 14px !important;
+    }
+
+    .lot-title {
+        font-size: 20px;
+        line-height: 1.3;
+    }
+
+    .category-tag, .lot-id {
+        font-size: 11px;
+        padding: 3px 8px;
+    }
+
+    .description-block p {
+        font-size: 13px;
+    }
+
+    .seller-row {
+        font-size: 14px;
+        flex-wrap: wrap;
+    }
+
+    .current-price {
+        font-size: 26px;
+    }
+
+    .timer-display {
+        gap: 4px;
+    }
+
+    .time-part {
+        min-width: 48px;
+        padding: 8px 6px;
+        border-radius: 10px;
+    }
+
+        .time-part span {
+            font-size: 18px;
+        }
+
+        .time-part::after {
+            font-size: 10px;
+        }
+
+    .input-with-icon input {
+        font-size: 14px;
+        padding: 10px 30px 10px 10px;
+    }
+
+    .btn-bid-submit {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .bids-history-section {
+        overflow-x: hidden;
+    }
+
+    .bids-table {
+        display: block;
+        min-width: auto;
+    }
+
+        .bids-table thead {
+            display: none;
+        }
+
+        .bids-table tbody {
+            display: block;
+        }
+
+        .bids-table tr {
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            margin-bottom: 12px;
+            background: #f8f9ff;
+            border: 1px solid #eee;
+            border-radius: 10px;
+        }
+
+        .bids-table td {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border: none;
+            border-bottom: 1px dashed #ddd;
+            font-size: 14px;
+        }
+
+            .bids-table td:last-child {
+                border-bottom: none;
+            }
+
+            .bids-table td::before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: #1a4d7a;
+                font-size: 12px;
+                text-transform: uppercase;
+            }
+
+    .bid-amount {
+        font-size: 16px;
+        color: #667eea;
+    }
+
+    .leading-badge {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+
+    .alert {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .footer-bottom p {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 320px) {
+    .box-card {
+        width: 120px;
+        height: 180px;
+        transform: rotateX(-3deg) rotateY(10deg) scale(0.8);
+    }
+
+    .front, .back, .left, .right {
+        width: 120px;
+        height: 180px;
+        transform: translateZ(60px);
+    }
+
+    .left {
+        transform: rotateY(-90deg) translateZ(60px);
+    }
+
+    .right {
+        transform: rotateY(90deg) translateZ(60px);
+    }
+
+    .back {
+        transform: rotateY(180deg) translateZ(60px);
+    }
+
+    .top {
+        width: 120px;
+        height: 120px;
+        transform: rotateX(90deg) translateZ(90px);
+    }
+
+    .face-content h3 {
+        font-size: 8px;
+    }
+
+    .face-content p {
+        font-size: 7px;
+    }
+
+    .face-content .icon {
+        font-size: 14px;
+    }
+
+    .lot-title {
+        font-size: 18px;
+    }
+
+    .current-price {
+        font-size: 24px;
+    }
+
+    .time-part {
+        min-width: 42px;
+        padding: 6px 4px;
+    }
+
+        .time-part span {
+            font-size: 16px;
+        }
+
+        .time-part::after {
+            font-size: 9px;
+        }
+
+    .btn-bid-submit {
+        font-size: 13px;
+        padding: 10px;
+        min-height: 44px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .box-card {
+        animation: none !important;
+        transform: rotateX(-10deg) rotateY(20deg) !important;
+    }
+
+        .box-card:hover {
+            animation-play-state: running !important;
+        }
+}
+
+@media (prefers-contrast: high) {
+    .box-card {
+        border: 2px solid #fff;
+    }
+
+    .face {
+        border-width: 3px;
+    }
+
+    .btn-bid-submit {
+        border: 2px solid #fff;
+    }
+
+    .current-price {
+        -webkit-text-stroke: 0.5px #000;
+    }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .container-card {
+        padding: 10px;
+    }
+
+    .box-card {
+        width: 100px;
+        height: 150px;
+        transform: rotateX(-5deg) rotateY(15deg) scale(0.7);
+    }
+
+    .front, .back, .left, .right {
+        width: 100px;
+        height: 150px;
+        transform: translateZ(50px);
+    }
+
+    .left {
+        transform: rotateY(-90deg) translateZ(50px);
+    }
+
+    .right {
+        transform: rotateY(90deg) translateZ(50px);
+    }
+
+    .back {
+        transform: rotateY(180deg) translateZ(50px);
+    }
+
+    .top {
+        width: 100px;
+        height: 100px;
+        transform: rotateX(90deg) translateZ(75px);
+    }
+
+    .face-content {
+        display: none;
+    }
+   
+    .trading-layout {
+        grid-template-columns: 1fr 300px;
+    }
+
+    .bidding-panel {
+        order: 0;
+    }
+}

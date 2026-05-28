@@ -1,0 +1,55 @@
+﻿.alert {
+    padding: 14px 18px;
+    margin-bottom: 18px;
+    border-radius: 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    border-left: 3px solid;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.alert p {
+    margin: 0 0 6px 0;
+    font-weight: 500;
+}
+
+/*  Ошибка (мягкий красный акцент) */
+.alert-error {
+    background: rgba(239, 83, 80, 0.12);
+    border-color: rgba(239, 83, 80, 0.5);
+    color: #ffdede;
+}
+
+/* Предупреждение (мягкий жёлтый акцент) */
+.alert-warning {
+    background: rgba(255, 183, 77, 0.12);
+    border-color: rgba(255, 183, 77, 0.5);
+    color: #fff3d6;
+}
+
+/* Кнопка внутри уведомления */
+.btn-hero {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-hero:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}

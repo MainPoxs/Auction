@@ -1,0 +1,324 @@
+﻿h1 {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* =========================================
+   ФОРМА ОПЛАТЫ
+   ========================================= */
+.card-form {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-input {
+    width: 100%;
+    padding: 13px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 15px;
+    font-family: inherit;
+    margin-bottom: 16px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+    .card-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .card-input:focus {
+        border-color: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 0 3px rgba(23, 98, 166, 0.3);
+    }
+
+.card-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.card-icon {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+    .card-icon::before {
+        content: '💳';
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 18px;
+        opacity: 0.7;
+        pointer-events: none;
+    }
+
+.error-msg {
+    padding: 10px 14px;
+    background: rgba(231, 76, 60, 0.2);
+    border: 1px solid rgba(231, 76, 60, 0.4);
+    border-radius: 10px;
+    margin: 10px 0;
+    font-size: 14px;
+    color: #fca5a5;
+}
+
+.card-form p {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    margin: 18px 0 24px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-pay {
+    width: 100%;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+    .btn-pay:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(39, 174, 96, 0.6);
+        background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    }
+
+/* =========================================
+   QR-КОД
+   ========================================= */
+.qr-payment-container {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.qr-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.qr-hint {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 18px;
+}
+
+.qr-image {
+    width: 180px;
+    height: 180px;
+    border-radius: 16px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    background: #fff;
+    padding: 8px;
+    margin: 0 auto 16px;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+    .qr-image:hover {
+        transform: scale(1.03);
+    }
+
+.qr-note {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+    .qr-note strong {
+        color: #2ecc71;
+        font-weight: 700;
+        font-size: 16px;
+    }
+.qr-instruction {
+    margin: 12px 0 20px;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    border-left: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+    .qr-instruction small {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+.qr-confirm-form {
+    margin-top: 10px;
+}
+
+.btn-qr-confirm {
+    width: 100%;
+    padding: 12px 20px;
+    background: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+    border: 2px solid rgba(46, 204, 113, 0.4);
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .btn-qr-confirm:hover {
+        background: rgba(46, 204, 113, 0.35);
+        color: #fff;
+        transform: translateY(-2px);
+    }
+/* =========================================
+   ССЫЛКА "НАЗАД"
+   ========================================= */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 18px;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid transparent;
+}
+
+    .back-link:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+        transform: translateX(-3px);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+/* Стили для страницы QR-оплаты */
+.qr-page {
+    max-width: 600px;
+    padding: 25px;
+}
+
+.lot-details-qr {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 16px;
+    margin: 16px 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+    .lot-details-qr p {
+        margin: 8px 0;
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .lot-details-qr strong {
+        color: #fff;
+        margin-right: 6px;
+    }
+
+.qr-confirm-form {
+    margin: 20px 0 10px;
+}
+
+.btn-qr-confirm {
+    width: 100%;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+}
+
+    .btn-qr-confirm:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(39, 174, 96, 0.6);
+    }
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 10px 14px;
+    margin-top: 10px;
+    transition: all 0.2s ease;
+}
+
+    .back-link:hover {
+        color: #fff;
+        transform: translateX(-3px);
+    }
+/* =========================================
+   АДАПТИВНОСТЬ
+   ========================================= */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .card-form, .qr-payment-container {
+        padding: 22px;
+    }
+
+    .card-row {
+        grid-template-columns: 1fr;
+    }
+
+    .qr-image {
+        width: 150px;
+        height: 150px;
+    }
+}

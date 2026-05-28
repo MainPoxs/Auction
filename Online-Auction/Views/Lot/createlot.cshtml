@@ -1,0 +1,81 @@
+﻿@using Online_Auction.Models
+@model List<Category>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles/indexstyle.css">
+    <link rel="stylesheet" type="text/css" href="styles/lotstyle.css">
+    <title>Создание лота</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Создать лот</h2>
+       
+        <!-- enctype для загрузки файлов -->
+        <form method="post" action="/createlot" enctype="multipart/form-data">
+
+            @* защита от CSRF-атак *@
+            @Html.AntiForgeryToken()
+            <label for="title">Название лота</label>
+            <input id="title" type="text" name="title" required>
+
+            <label for="imageUrl">Изображение лота</label>
+            <input id="imageUrl" type="file" name="imageFile">
+
+            <label for="descriptionLot">Краткое описание</label>
+            <textarea id="descriptionLot" name="descriptionLot"
+                      rows="3" required></textarea>
+
+            <label for="startPrice">Стартовая цена</label>
+            <input id="startPrice" type="number" name="startPrice" required
+                   min="0.01" step="0.01">
+
+            <label for="createdAt">Дата начала</label>
+            <input id="createdAt" type="datetime-local" name="createdAt" required
+                   min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm")">
+
+            <label for="endDate">Дата завершения</label>
+            <input id="endDate" type="datetime-local" name="endDate" required
+                   min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm")">
+
+            <div>
+                <label for="categoryId">Выберите категорию:</label>
+                <select id="categoryId" name="categoryId" required>
+                    @foreach (Category category in ViewBag.Categories)
+                    {
+                        <option value="@category.Id">@category.NameC</option>
+                    }                    
+                </select>
+            </div>            
+
+            <button type="submit">Добавить лот</button>
+        </form>
+        <a href="/usaccount" class="back-link">← В личный кабинет</a>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <nav class="footer-nav">
+                    <a href="/allresults">Все лоты</a>
+                    <a href="/about">О проекте</a>
+                    <a href="/rules">Правила</a>
+                </nav>
+
+                <div class="social-icons">
+                    <span><img src="/images/github.png" alt="логотип" /></span>
+                    <span><img src="/images/vk.png" alt="логотип" /></span>
+                    <span><img src="/images/MAX-32x32.png" alt="логотип" /></span>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Интернет-аукцион. Все права защищены.</p>
+            </div>
+        </footer>
+    </div>
+   
+</body>
+</html>

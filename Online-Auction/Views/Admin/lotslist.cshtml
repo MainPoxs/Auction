@@ -1,0 +1,128 @@
+﻿@using Online_Auction.Models
+@model List<Online_Auction.Models.Lot>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles/indexstyle.css">
+    <link rel="stylesheet" href="/styles/adminstyle.css">
+    <link rel="stylesheet" type="text/css" href="/styles/pendingstyle.css">
+    <title>Все лоты</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="menu-admin">
+                <span>&#9881; Администратор</span>
+                <form action="/logout" method="get">
+                    <a href="/" class="back-link">На главную</a>
+                    <a href="/adminaccount" class="back-link">&#9881; Панель админа</a>
+                    <button type="submit" class="btn-logout">Выйти</button>
+                </form>
+            </div>
+        </div>
+        <div class="page-header">
+            <h2>Все лоты</h2>
+            <a href="/createlot" class="btn-create">＋ Создать лот</a>
+        </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Лот</th>
+                <th>Продавец</th>
+                <th>Цена</th>
+                <th>Создан</th>
+                <th>Статус</th>              
+                <th>Детали</th>                  
+                <th>Поменять статус лота</th>              
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lot in ViewBag.Lots)
+            {
+                <tr class="table-thead">
+                    <td>@lot.Title</td>
+                    <td>
+                        @lot.Seller.FirstName 
+                        @lot.Seller.LastName
+                    </td>
+                    <td>@lot.StartPrice ₽</td>
+                    <td>@lot.CreatedAt?.ToString("dd.MM.yyyy")</td>
+                    <td>@GetStatusText(lot.Status)</td>
+                    <td>
+                        <a href="/details/@lot.Id" class="details-link">Подробнее</a>
+                    </td>
+                    <td>
+                        <form method="post" action="/lot/@lot.Id/status" class="d-inline">
+
+                            @* защита от CSRF-атак *@
+                            @Html.AntiForgeryToken()
+                            <button type="submit" name="status" value="@((int)LotStatus.Active)"
+                                    class="btn-success">
+                                Активен
+                            </button>
+                            <button type="submit" name="status" value="@((int)LotStatus.Sold)"
+                                    class="btn-success">
+                                Продан
+                            </button>
+                                @if (lot.Status == LotStatus.Blocked)
+                                {
+                                    <button type="submit" name="status" value="@((int)LotStatus.Upblocked)"
+                                            class="btn-success">
+                                        &#128275; Разблокировать
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button type="submit" name="status" value="@((int)LotStatus.Blocked)"
+                                            class="btn-danger">
+                                        &#128274; Заблокировать
+                                    </button>
+                                }
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+        <footer class="footer">
+            <div class="footer-content">
+                <nav class="footer-nav">
+                    <a href="/allresults">Все лоты</a>
+                    <a href="/about">О проекте</a>
+                    <a href="/rules">Правила</a>
+                </nav>
+
+                <div class="social-icons">
+                    <span><img src="/images/github.png" alt="логотип" /></span>
+                    <span><img src="/images/vk.png" alt="логотип" /></span>
+                    <span><img src="/images/MAX-32x32.png" alt="логотип" /></span>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Интернет-аукцион. Все права защищены.</p>
+            </div>
+        </footer>
+    </div>
+    @* Вспомогательный метод для отображения статуса *@
+    @functions {
+        string GetStatusText(LotStatus status)
+        {
+            return status switch
+            {
+                LotStatus.NotActive => "Не активен",
+                LotStatus.Active => "Активен",
+                LotStatus.Blocked => "Заблокирован",
+                LotStatus.Upblocked => "Разблокирован",
+                LotStatus.Sold => "Продан",
+                LotStatus.Review => "На проверке",
+                _ => "Неизвестно"
+            };
+        }
+    }
+</body>
+</html>

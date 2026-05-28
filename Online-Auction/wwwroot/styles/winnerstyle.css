@@ -1,0 +1,395 @@
+﻿/* =========================================
+   1. HEADER & MENU
+   ========================================= */
+.header {
+    position: relative;
+    z-index: 10;
+    padding: 15px 30px;
+    width: 100%;
+}
+
+.menu {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 10px 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.nav {
+    display: flex;
+    list-style: none;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+}
+
+    .nav li a {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 16px;
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 10px;
+        transition: all 0.25s ease;
+    }
+
+        .nav li a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 14px;
+    border-radius: 12px;
+}
+
+.name-account {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.user-profile .icon {
+    color: #fff;
+    font-size: 18px;
+    transition: transform 0.2s ease;
+}
+
+    .user-profile .icon:hover {
+        transform: scale(1.1);
+    }
+
+/* =========================================
+   2. MAIN & BANNER
+   ========================================= */
+.main {
+    flex: 1;
+    padding: 40px 0;
+}
+
+.winner-banner {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #fff;
+    padding: 24px 30px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+}
+
+    .winner-banner h1 {
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+/* =========================================
+   3. ДВУХКОЛОНОЧНЫЙ МАКЕТ
+   ========================================= */
+.winner-layout {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 28px;
+    align-items: start;
+}
+
+/* Карточки */
+.lot-summary-card,
+.participants-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+    .lot-summary-card h2,
+    .participants-card h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid #667eea30;
+    }
+
+/* =========================================
+   4. КАРТОЧКА ЛОТА
+   ========================================= */
+.lot-image-wrapper {
+    position: relative;
+    min-height: 500px;
+    max-height: 600px;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.lot-image-wrapper img {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
+    display: block;
+}
+
+.lot-summary h3 {
+    font-size: 20px;
+    color: #2d3748;
+    margin-bottom: 6px;
+}
+
+.category {
+    display: inline-block;
+    background: #edf2f7;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #4c51bf;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.description {
+    font-size: 14px;
+    color: #4a5568;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Цена */
+.price-summary {
+    background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+    padding: 14px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.price-summary .label {
+    display: block;
+    font-size: 12px;
+    color: #718096;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.price-summary .value {
+    font-size: 24px;
+    font-weight: 800;
+    color: #553c9a;
+}
+
+/* Даты аукциона */
+.auction-dates {
+    border-top: 1px solid #edf2f7;
+    padding-top: 16px;
+}
+
+.date-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 14px;
+}
+
+.date-row span {
+    color: #718096;
+}
+
+.date-row strong {
+    color: #2d3748;
+}
+
+/* =========================================
+   5. УЧАСТНИКИ (ПОБЕДИТЕЛЬ + ПРОДАВЕЦ)
+   ========================================= */
+.participants-card {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.section-header .icon {
+    font-size: 20px;
+}
+
+.section-header h3 {
+    margin: 0;
+    font-size: 16px;
+    border: none;
+    padding: 0;
+}
+
+/* Детали пользователя */
+.user-details {
+    background: #f8fafc;
+    padding: 16px;
+    border-radius: 10px;
+}
+
+.user-details p {
+    font-size: 14px;
+    color: #4a5568;
+    margin-bottom: 8px;
+}
+
+    .user-details p:last-child {
+        margin-bottom: 0;
+    }
+
+.user-details strong {
+    color: #2d3748;
+    font-weight: 600;
+}
+
+/* Статусы */
+.text-muted {
+    color: #718096;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.not-winner {
+    color: #e53e3e;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.seller-anonymous {
+    color: #718096;
+    font-size: 14px;
+    font-style: italic;
+}
+
+/* =========================================
+   6. АДАПТИВ
+   ========================================= */
+
+/* Планшеты */
+@media (max-width: 992px) {
+    .winner-layout {
+        grid-template-columns: 1fr 320px;
+        gap: 24px;
+    }
+
+    .lot-image-wrapper {
+        height: 200px;
+    }
+}
+
+/* Мобильные */
+@media (max-width: 768px) {
+    .winner-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .menu {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .nav {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    .nav-top {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        padding-right: 0;
+        padding-bottom: 12px;
+    }
+
+    .nav-bottom {
+        padding-left: 0;
+        padding-top: 12px;
+        width: 100%;
+    }
+
+    .user-profile {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .winner-banner {
+        padding: 20px 16px;
+    }
+
+        .winner-banner h1 {
+            font-size: 20px;
+        }
+
+    .lot-summary-card,
+    .participants-card {
+        padding: 20px 16px;
+    }
+
+    .lot-image-wrapper {
+        height: 180px;
+    }
+
+    .price-summary .value {
+        font-size: 22px;
+    }
+}
+
+/* Маленькие телефоны */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 14px;
+    }
+
+    .lot-image-wrapper {
+        height: 160px;
+    }
+
+    .lot-summary h3 {
+        font-size: 18px;
+    }
+
+    .price-summary .value {
+        font-size: 20px;
+    }
+
+    .user-details p {
+        font-size: 13px;
+    }
+
+    .date-row {
+        font-size: 13px;
+    }
+
+    .footer-nav {
+        flex-direction: column;
+        gap: 8px;
+    }
+}

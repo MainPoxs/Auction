@@ -1,0 +1,84 @@
+﻿@using Online_Auction.Models
+@model List<Online_Auction.Models.Lot>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles/indexstyle.css">
+    <link rel="stylesheet" href="/styles/adminstyle.css">
+    <link rel="stylesheet" type="text/css" href="/styles/pendingstyle.css">
+    <title>Лоты на модерации</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="menu-admin">
+                <span>&#9881; Администратор</span>
+                <form action="/logout" method="get">
+                    <a href="/" class="back-link">На главную</a>
+                    <a href="/adminaccount" class="back-link">&#9881; Панель админа</a>
+                    <button type="submit" class="logout-link">Выйти</button>
+                </form>
+            </div>
+        </div>
+<h2>Лоты на модерации</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Лот</th>
+                <th>Продавец</th>
+                <th>Цена</th>
+                <th>Создан</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lot in ViewBag.Lots)
+            {
+                <tr class="table-thead">
+                    <td>@lot.Title</td>
+                    <td>@lot.Seller.LastName</td>
+                    <td>@lot.StartPrice ₽</td>
+                    <td>@lot.CreatedAt?.ToString("dd.MM.yyyy")</td>                 
+                    <td>
+                        <a href="/details/@lot.Id" class="details-link">Детали</a>
+
+                        <form method="post" action="/admin/lot/@lot.Id/status" class="d-inline">
+
+                            @* защита от CSRF-атак *@
+                            @Html.AntiForgeryToken()
+                            <button type="submit" name="status" value="@((int)LotStatus.Active)"
+                                    class="btn-success">Одобрить</button>
+                            <button type="submit" name="status" value="@((int)LotStatus.Blocked)"
+                                    class="btn-danger">Отклонить</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+        <footer class="footer">
+            <div class="footer-content">
+                <nav class="footer-nav">
+                    <a href="/allresults">Все лоты</a>
+                    <a href="/about">О проекте</a>
+                    <a href="/rules">Правила</a>
+                </nav>
+
+                <div class="social-icons">
+                    <span><img src="/images/github.png" alt="логотип" /></span>
+                    <span><img src="/images/vk.png" alt="логотип" /></span>
+                    <span><img src="/images/MAX-32x32.png" alt="логотип" /></span>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Интернет-аукцион. Все права защищены.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

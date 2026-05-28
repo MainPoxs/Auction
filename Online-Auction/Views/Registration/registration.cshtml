@@ -1,0 +1,67 @@
+﻿@using Online_Auction.Models
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles/indexstyle.css">
+    <link rel="stylesheet" type="text/css" href="/styles/regstyle.css">
+    <title>Регистрация</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card-container">
+      		<div class="image-overlay">
+                <h2>Время найти <br>уникальные лоты</h2>
+                <a href="/login" class="mini-btn">Войти &#10140;</a>
+            </div>
+
+            <div class="form-side">
+                <div class="form-wrapper">
+                    <h2 class="form-title">Регистрация</h2>
+
+                    <form method="post" action="/registration">
+                        @Html.AntiForgeryToken()
+
+                        <div class="input-group">
+                            <input type="text" name="firstName" placeholder="Ваше Имя" required>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="text" name="lastName" placeholder="Ваша Фамилия" required>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="email" name="email" placeholder="E-mail адрес" required>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="text" name="loginUs" placeholder="Придумайте логин" required>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="password" name="password" placeholder="Пароль" required>
+                        </div>
+
+                        <button type="submit" class="btn-submit">Создать аккаунт</button>
+                    </form>
+
+                    <div class="footer-links">
+                        <p>Есть вопросы? Свяжитесь с нами:</p>
+                        <div class="social-icons">   
+                            <span><img src="/images/github.png" alt="логотип" /></span>
+                            <span><img src="/images/vk.png" alt="логотип"/></span>
+                            <span><img src="/images/MAX-32x32.png" alt="логотип"/></span>                                 
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <a href="/" class="back-home">&#8592; На главную</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+﻿@model Online_Auction.Models.Feedback
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/login.css"> 
+    <title>Написать администратору</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>&#128233; Написать администратору</h2>
+        <p>Если ваш аккаунт заблокирован, опишите проблему. Мы проверим и ответим.</p>
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-error">@TempData["Error"]</div>
+        }
+
+        <form method="post" action="/contact-admin">
+            @Html.AntiForgeryToken()
+            
+            <label for="SenderContact">
+                Ваш Логин или Email:<br>
+                <input id="SenderContact" type="text" name="SenderContact" required>
+            </label><br><br>
+
+            <label for="Subject">
+                Тема:<br>
+                <input id="Subject" type="text" name="Subject" value="Разблокировка аккаунта">
+            </label><br><br>
+
+            <label for="MessageText">
+                Сообщение:<br>
+                <textarea id="MessageText" name="MessageText" rows="5" required></textarea>
+            </label><br><br>
+
+            <button type="submit" class="btn-hero">Отправить письмо</button>
+        </form>
+
+        <a href="/login" class="back-link">Вернуться ко входу</a>
+    </div>
+</body>
+</html>

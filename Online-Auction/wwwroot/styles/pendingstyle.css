@@ -1,0 +1,399 @@
+﻿/* =========================================
+   ЗАГОЛОВОК СТРАНИЦЫ И КНОПКА
+   ========================================= */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.page-header h2 {
+    width: auto;
+    margin: 0;
+    text-align: center; 
+    font-size: 26px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    flex: 1; 
+}
+.btn-logout {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid transparent;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.btn-logout:hover {
+    background: rgba(255, 255, 255, 0.1); 
+    color: #fff;   
+    transform: translateY(-1px);
+}
+
+.btn-create {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;    
+    color: #fff;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;  
+    background: linear-gradient(135deg, #1a4d7a 0%, #2E6A9D 100%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.btn-create:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(23, 98, 166, 0.7);
+    background: linear-gradient(135deg, #2E6A9D 0%, #738CA2 100%);
+}
+
+/* =========================================
+   ТАБЛИЦА ЛОТОВ
+   ========================================= */
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    background: transparent;
+    border: none;
+}
+
+.table thead tr {
+    background: linear-gradient(135deg, #1a4d7a 0%, #2E6A9D 100%);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+}
+
+.table th {
+    padding: 16px 14px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #fff;
+    border: none;
+    white-space: nowrap;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.table th:first-child {
+    border-radius: 12px 0 0 12px;
+}
+
+.table th:last-child {
+    border-radius: 0 12px 12px 0;
+}
+
+.table tbody tr {
+    background: rgb(248 248 248 / 95%);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08), 
+        0 2px 4px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    transition: all 0.25s ease;
+    border: none;
+}
+
+.table tbody tr:hover {
+    transform: translateY(-3px) scale(1.005);
+    background: #ffffff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12),
+        0 4px 8px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+.table td {
+    padding: 16px 14px;
+    font-size: 14px;
+    color: #2c3e50;
+    vertical-align: middle;
+    border: none;
+    background: transparent;
+}
+
+.table td:first-child {
+    border-radius: 12px 0 0 12px;
+}
+
+.table td:last-child {
+    border-radius: 0 12px 12px 0;
+}
+
+.table td:nth-child(1) {
+    min-width: 200px;
+    font-weight: 700;
+    color: #1a4d7a;
+}
+
+.table td:nth-child(2) {
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.table td:nth-child(3) {
+    white-space: nowrap;
+    font-weight: 700;
+    color: #2E6A9D;
+    font-size: 15px;
+}
+
+.table td:nth-child(4) {
+    white-space: nowrap;
+    color: #5a6c7d;
+    font-weight: 500;
+}
+
+/* =========================================
+   КНОПКИ ДЕЙСТВИЙ (В ТАБЛИЦЕ)
+   ========================================= */
+.d-inline {
+    display: inline-flex;
+    gap: 6px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.details-link {
+    color: #2980b9;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+    transition: all 0.2s ease;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.details-link:hover {
+    color: #fff;
+    background: #2980b9;
+    border-color: #1a5276;
+    transform: translateY(-1px);
+}
+
+.btn-success, .btn-danger {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.btn-success {
+    background: #27ae60;
+    color: #fff;
+    border-color: #1e8449;
+    box-shadow: 0 2px 6px rgba(39, 174, 96, 0.3);
+}
+
+.btn-success:hover {
+    background: #2ecc71;
+    border-color: #27ae60;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(46, 204, 113, 0.4);
+}
+
+.btn-danger {
+    background: #c0392b;
+    color: #fff;
+    border-color: #922b21;
+    box-shadow: 0 2px 6px rgba(192, 57, 43, 0.3);
+}
+
+.btn-danger:hover {
+    background: #e74c3c;
+    border-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.4);
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+.footer {
+    margin-top: auto;
+    padding: 25px 20px 20px;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px 16px 0 0;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 20px;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 32px;
+}
+
+.footer-nav a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.footer-nav a:hover {
+    color: #fff;
+}
+
+.footer-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.8);
+    transition: width 0.3s ease;
+}
+
+.footer-nav a:hover::after {
+    width: 100%;
+}
+
+.footer .social-icons {
+    position: absolute;
+    right: 0;
+    display: flex;
+    gap: 12px;
+}
+
+.footer .social-icons span {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.footer .social-icons span:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.footer-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent 0%,
+    rgba(255, 255, 255, 0.3) 20%,
+    rgba(255, 255, 255, 0.3) 80%, transparent 100%);
+    margin: 20px 0 15px;
+}
+
+.footer-bottom p {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+}
+
+/* =========================================
+   АДАПТИВНОСТЬ
+   ========================================= */
+@media (max-width: 900px) {
+    .container {
+        margin: 10px;
+        padding: 15px;
+        border-radius: 20px;
+        width: 98%;
+    }
+
+    /* На мобильных заголовок и кнопка в столбик */
+    .page-header {
+        flex-direction: column;
+        align-items: center; 
+        gap: 15px;
+    }
+
+    .btn-create {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+
+    .menu-admin {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .menu-admin form {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        border-radius: 12px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table thead tr,
+    .table tbody tr {
+        display: table;
+        width: 100%;
+        min-width: 650px;
+    }
+
+    .footer {
+        margin-top: 40px;
+        border-radius: 12px 12px 0 0;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .footer-nav {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .footer .social-icons {
+        position: static;
+        justify-content: center;
+    }
+}

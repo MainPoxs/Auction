@@ -1,0 +1,110 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* =========================================
+   КАРТОЧКА УСПЕХА
+   ========================================= */
+.container {
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.15);
+    text-align: center;
+    max-width: 480px;
+    width: 100%;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.container p {
+    font-size: 16px;
+    color: #718096;
+    margin-bottom: 28px;
+}
+
+/* =========================================
+   КНОПКА "НА ГЛАВНУЮ"
+   ========================================= */
+.back-link {
+    display: inline-block;
+    padding: 12px 32px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+    .back-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(102, 126, 234, 0.45);
+    }
+
+    .back-link:active {
+        transform: translateY(0);
+    }
+
+
+/* =========================================
+   АДАПТИВ
+   ========================================= */
+@media (max-width: 480px) {
+    body {
+        padding: 16px;
+        align-items: flex-start;
+        padding-top: 10vh;
+    }
+
+    .container {
+        padding: 30px 20px;
+    }
+
+        .container h1 {
+            font-size: 22px;
+        }
+
+        .container p {
+            font-size: 15px;
+        }
+
+    .back-link {
+        width: 100%;
+        padding: 12px;
+    }
+}

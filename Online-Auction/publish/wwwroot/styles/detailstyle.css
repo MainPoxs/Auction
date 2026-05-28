@@ -1,0 +1,410 @@
+﻿.header {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.menu {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px; 
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 12px 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.nav {
+    display: flex;
+    list-style: none;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.nav li a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+    background: transparent;
+    border: none;
+}
+
+.nav li a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+/* Профиль пользователя */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;   
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.user-profile:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.name-account {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-profile .icon {
+    font-size: 18px;
+    color: #fff;
+}
+
+/* =========================================
+   ОСНОВНАЯ СЕТКА 
+   ========================================= */
+.details-main {
+    flex: 1; 
+}
+
+.details-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 35px;
+    align-items: start;
+}
+
+/* =========================================
+   ЛЕВАЯ КОЛОНКА 
+   ========================================= */
+.details-left {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    align-items: center;
+}
+
+/* Карточка изображения */
+.image-card {
+    width: 60%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    padding: 40px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+}
+
+.image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.5s ease;
+}
+
+.image-card:hover img {
+    transform: scale(1.04);
+}
+
+.no-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.25);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 15px;
+    border-radius: 14px;
+}
+
+/* Информационная карточка */
+.info-card {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.lot-title {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    color: #fff;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.lot-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.category-tag, .lot-id, .status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.3px;
+}
+
+/* Цвета статусов */
+.status-badge.active {
+    background: rgba(46, 204, 113, 0.25);
+    color: #2ecc71;
+    border-color: rgba(46, 204, 113, 0.4);
+}
+
+.status-badge.review {
+    background: rgba(241, 196, 15, 0.25);
+    color: #f1c40f;
+    border-color: rgba(241, 196, 15, 0.4);
+}
+
+.status-badge.sold {
+    background: rgba(52, 152, 219, 0.25);
+    color: #3498db;
+    border-color: rgba(52, 152, 219, 0.4);
+}
+
+.status-badge.blocked {
+    background: rgba(231, 76, 60, 0.25);
+    color: #e74c3c;
+    border-color: rgba(231, 76, 60, 0.4);
+}
+
+.status-badge.default {
+    background: rgba(149, 165, 166, 0.25);
+    color: #95a5a6;
+}
+
+.description-block h3 {
+    font-size: 17px;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+}
+
+.description-block p {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.75;
+}
+
+/* =========================================
+   ПРАВАЯ КОЛОНКА 
+   ========================================= */
+.details-right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: sticky;
+    top: 20px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+.label {
+    display: block;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.65);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.price-value {
+    font-size: 34px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 6px;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    letter-spacing: -1px;
+}
+
+.hint {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    padding-top: 4px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 8px;
+}
+
+.seller-card h3, .actions-card h3 {
+    font-size: 16px;
+    margin-bottom: 14px;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+}
+
+.seller-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.seller-row .icon {
+    font-size: 18px;
+}
+
+.btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, #1762A6 0%, #2E6A9D 100%);
+    color: #fff;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(23, 98, 166, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(23, 98, 166, 0.6);
+    background: linear-gradient(135deg, #2E6A9D 0%, #738CA2 100%);
+}
+
+.status-box {
+    padding: 14px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.status-box.neutral {
+    background: rgba(149, 165, 166, 0.2);
+    color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(149, 165, 166, 0.3);
+}
+
+/* =========================================
+   АДАПТИВНОСТЬ
+   ========================================= */
+@media (max-width: 900px) {
+    .details-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .details-right {
+        position: static;
+        order: -1;
+    }
+
+    .container {
+        margin: 10px;
+        padding: 15px;
+        border-radius: 20px;
+    }
+
+    .menu {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .nav {
+        justify-content: center;
+    }
+
+    .nav-bottom {
+        justify-content: center;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+}
+
+@media (max-width: 600px) {
+    .lot-title {
+        font-size: 24px;
+    }
+
+    .price-value {
+        font-size: 28px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .footer-nav {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .footer .social-icons {
+        position: static;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,97 @@
+﻿@model List<(Online_Auction.Models.Feedback feedback,
+Online_Auction.Models.User user)>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles/indexstyle.css">
+    <link rel="stylesheet" href="/styles/adminstyle.css">
+    <link rel="stylesheet" href="/styles/adminmessages.css">
+    <title>Входящие сообщения</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="menu-admin">
+                <span>&#9881; Администратор</span>
+                <form action="/logout" method="get">
+                    <a href="/" class="back-link">На главную</a>
+                    <a href="/adminaccount" class="back-link">&#9881; Панель админа</a>
+                    <button type="submit" class="logout-link">Выйти</button>
+                </form>
+            </div>
+        </div>
+        <h1>&#128235; Входящие сообщения</h1>
+        <main class="main">
+
+            @* Пустое состояние *@
+            @if (Model == null || !Model.Any())
+            {
+                <div class="empty-state">
+                    <span class="empty-icon">&#128234;</span>
+                    <h3>Сообщений пока нет</h3>                   
+                </div>
+            }
+            else
+            {
+                @* Таблица с сообщениями *@
+                <div class="table-wrapper">
+                    <table class="feedback-table">
+                        <thead>
+                            <tr>                                
+                                <th>От кого</th>
+                                <th>Логин/email</th>
+                                <th>Тема</th>
+                                <th>Сообщение</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="table-thead">
+                                 <td>
+                                     @if(item.user != null)
+                                        {
+                                          <strong>
+                                              @item.user.FirstName 
+                                              @item.user.LastName
+                                          </strong>
+                                        }
+                                 </td>
+                                    <td><strong>@item.feedback.SenderContact</strong></td>
+                                    <td>@item.feedback.Subject</td>
+                                    <td class="message-cell">@item.feedback.MessageText</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }            
+
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <nav class="footer-nav">
+                    <a href="/allresults">Все лоты</a>
+                    <a href="/about">О проекте</a>
+                    <a href="/rules">Правила</a>
+                </nav>
+
+                <div class="social-icons">
+                    <span><img src="/images/github.png" alt="логотип" /></span>
+                    <span><img src="/images/vk.png" alt="логотип" /></span>
+                    <span><img src="/images/MAX-32x32.png" alt="логотип" /></span>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Интернет-аукцион. Все права защищены.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

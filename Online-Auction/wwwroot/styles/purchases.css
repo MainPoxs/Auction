@@ -1,0 +1,544 @@
+﻿
+.menu-user {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 12px 20px;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+    background: transparent;
+    border: transparent;
+}
+
+    .back-link:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+        transform: translateY(-2px);
+    }
+
+.top-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-link {
+    font-size: 20px;
+    padding: 6px 10px;
+    color: rgba(255, 255, 255, 0.9);
+    transition: all 0.25s ease;
+}
+
+    .user-link:hover {
+        color: #fff;
+        transform: scale(1.1);
+    }
+
+.user-info a {
+    color: #fca5a5;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+    .user-info a:hover {
+        background: rgba(239, 68, 68, 0.2);
+        color: #fff;
+    }
+
+/* =========================================
+   ОСНОВНОЙ КОНТЕНТ
+   ========================================= */
+.main {
+    flex: 1;
+    padding: 10px 0 30px;
+}
+
+/* Пустое состояние */
+.empty-message {
+    text-align: center;
+    padding: 60px 30px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+    .empty-message p {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 20px;
+    }
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #1762A6 0%, #2E6A9D 100%);
+    color: #fff;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(23, 98, 166, 0.4);
+}
+
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(23, 98, 166, 0.6);
+        background: linear-gradient(135deg, #2E6A9D 0%, #738CA2 100%);
+    }
+
+/* =========================================
+   ТАБЛИЦА ПОКУПОК
+   ========================================= */
+.purchases-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px; /* 🔹 ОТСТУПЫ МЕЖДУ СТРОКАМИ */
+    background: transparent;
+    border: none;
+}
+
+    /* Шапка таблицы */
+    .purchases-table thead tr {
+        background: linear-gradient(135deg, #1a4d7a 0%, #2E6A9D 100%);
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .purchases-table th {
+        padding: 16px 14px;
+        text-align: left;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: #fff;
+        border: none;
+        white-space: nowrap;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+        .purchases-table th:first-child {
+            border-radius: 12px 0 0 12px;
+        }
+
+        .purchases-table th:last-child {
+            border-radius: 0 12px 12px 0;
+        }
+
+    .purchases-table tbody tr {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08),
+            0 2px 4px rgba(0, 0, 0, 0.05), 
+            inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        transition: all 0.25s ease;
+        border: none;
+    }
+
+        .purchases-table tbody tr:hover {
+            transform: translateY(-3px) scale(1.005);
+            background: #ffffff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12),
+                0 4px 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1);
+        }
+
+    .purchases-table td {
+        padding: 16px 14px;
+        font-size: 14px;
+        color: #2c3e50;
+        vertical-align: middle;
+        border: none;
+        background: transparent;
+    }
+
+        .purchases-table td:first-child {
+            border-radius: 12px 0 0 12px;
+        }
+
+        .purchases-table td:last-child {
+            border-radius: 0 12px 12px 0;
+        }
+
+/* Ячейка с лотом (фото + текст) */
+.lot-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 220px;
+}
+
+.lot-thumb {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.lot-cell strong {
+    display: block;
+    font-size: 14px;
+    color: #1a4d7a;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.lot-cell .text-muted {
+    font-size: 12px;
+    color: #5a6c7d;
+}
+
+/* Цена */
+.price-cell {
+    font-weight: 700;
+    color: #2E6A9D;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+/* Статусы */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(149, 165, 166, 0.2);
+    color: #95a5a6;
+    border: 1px solid rgba(149, 165, 166, 0.3);
+}
+
+    .status-badge small {
+        font-weight: 400;
+        font-size: 11px;
+        opacity: 0.9;
+    }
+
+/* Цвета статусов */
+.status-won {
+    background: rgba(46, 204, 113, 0.25);
+    color: #2ecc71;
+    border-color: rgba(46, 204, 113, 0.4);
+}
+
+.status-nopaid {
+    background: rgba(241, 196, 15, 0.25);
+    color: #f1c40f;
+    border-color: rgba(241, 196, 15, 0.4);
+}
+
+.status-paid {
+    background: rgba(52, 152, 219, 0.25);
+    color: #3498db;
+    border-color: rgba(52, 152, 219, 0.4);
+}
+
+.status-shipped {
+    background: rgba(155, 89, 182, 0.25);
+    color: #9b59b6;
+    border-color: rgba(155, 89, 182, 0.4);
+}
+
+.status-completed {
+    background: rgba(149, 165, 166, 0.25);
+    color: #95a5a6;
+    border-color: rgba(149, 165, 166, 0.4);
+}
+
+.status-cancelled {
+    background: rgba(231, 76, 60, 0.25);
+    color: #e74c3c;
+    border-color: rgba(231, 76, 60, 0.4);
+}
+
+/* Кнопки действий */
+.actions-cell {
+    white-space: nowrap;
+}
+
+.btn-group {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.btn-small {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-info {
+    background: rgba(41, 128, 185, 0.2);
+    color: #2980b9;
+    border: 1px solid rgba(41, 128, 185, 0.4);
+}
+
+    .btn-info:hover {
+        background: rgba(41, 128, 185, 0.35);
+        color: #fff;
+        transform: translateY(-2px);
+    }
+
+.btn-outline {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+    .btn-outline:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.5);
+    }
+
+html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+   ========================================= */
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+        padding: 15px;
+        border-radius: 20px;
+    }
+
+    .menu-user {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 12px 16px;
+    }
+
+    .back-link {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 14px;
+        min-height: 44px; 
+        font-size: 14px;
+    }
+
+    .top-section {
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .user-link, .user-info a {
+        padding: 10px 14px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) { 
+    .purchases-table, .purchases-table thead, .purchases-table tbody,
+    .purchases-table th, .purchases-table td, .purchases-table tr {
+        display: block;
+        width: 100%;
+    }
+
+   .purchases-table thead {
+       position: absolute;
+       left: -9999px;
+       top: -9999px;
+       visibility: hidden;
+   }
+
+   .purchases-table tbody tr {
+       margin-bottom: 16px;
+       padding: 16px;
+       background: rgba(255, 255, 255, 0.95);
+       border-radius: 16px;
+       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+       border: none;
+       transform: none !important; 
+   }
+
+   .purchases-table td {
+       padding: 10px 0;
+       border: none;
+       border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+       text-align: right;
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       gap: 10px;
+   }
+
+ .purchases-table td:last-child {
+     border-bottom: none;
+ }
+
+ .purchases-table td::before {
+     content: attr(data-label);
+     font-weight: 600;
+     color: #1a4d7a;
+     font-size: 13px;
+     text-align: left;
+     flex-shrink: 0;
+ }
+
+    .lot-cell {
+        flex-direction: row !important;
+        text-align: left !important;
+    }
+
+        .lot-cell::before {
+            display: none;
+        }
+
+    .price-cell::before {
+        font-size: 15px;
+        color: #2E6A9D;
+    }
+
+    .actions-cell {
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+    }
+
+        .actions-cell::before {
+            display: none;
+            text-align: center;
+            width: 100%;
+        }
+
+    .btn-group {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-small {
+        width: 100%;
+        justify-content: center;
+        padding: 10px;
+        min-height: 44px;
+        font-size: 13px;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .empty-message {
+        padding: 40px 20px;
+    }
+
+        .empty-message p {
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+    .btn-primary {
+        width: 100%;
+        justify-content: center;
+        min-height: 48px;
+        padding: 14px;
+    }
+
+    .lot-thumb {
+        width: 44px;
+        height: 44px;
+    }
+
+    .status-badge {
+        font-size: 11px;
+        padding: 4px 8px;
+        flex-wrap: wrap;
+    }
+
+    .lot-cell strong {
+        font-size: 13px;
+        overflow-wrap: break-word;
+    }
+}
+
+@media (max-height: 600px) and (orientation: landscape) {
+    .menu-user {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .purchases-table tbody tr {
+        margin-bottom: 12px;
+        padding: 12px;
+    }
+
+    .purchases-table td {
+        padding: 6px 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .purchases-table tbody tr:hover,
+    .btn-small:hover, .back-link:hover, .user-info a:hover {
+        transform: none !important;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .purchases-table tbody tr:hover,
+    .btn-small:hover, .back-link:hover, .user-link:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    .purchases-table tbody tr:active,
+    .btn-small:active {
+        transform: scale(0.99) !important;
+        opacity: 0.9;
+    }
+}
